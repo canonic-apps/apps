@@ -1,10 +1,11 @@
 {
-  "tier": 33,
+  "inherits": "/CANONIC/LANGUAGE/TEMPLATES/CONFIG",
+  "tier": 63,
   "ledger": {
     "autocommit": true,
     "badge": "NOTICE",
     "message": "VaaS [{tier}] {status}",
-    "stage": ["NOTICE"],
+    "stage": ["NOTICE", "config.json"],
     "triggers": {
       "pre-commit": false,
       "post-validation": true,
