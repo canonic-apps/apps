@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Twenty Thousand Conversations | CANONIC</title>
+    <style>
+        :root {
+            --bg: #000;
+            --fg: #fff;
+            --accent: #00ff88;
+            --dim: #888;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: ui-monospace, 'SF Mono', 'Cascadia Code', Menlo, monospace;
+            background: var(--bg);
+            color: var(--fg);
+            min-height: 100vh;
+        }
+        .topnav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid #333;
+        }
+        .topnav-brand {
+            font-size: 0.9rem;
+            letter-spacing: 0.2em;
+            color: var(--fg);
+            text-decoration: none;
+        }
+        .topnav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        .topnav-links a {
+            color: var(--dim);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.2s;
+        }
+        .topnav-links a:hover { color: var(--accent); }
+        .topnav-links a.active { color: var(--fg); }
+
+        article {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+        h1 {
+            font-size: 2rem;
+            font-weight: 300;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+        }
+        .subtitle {
+            color: var(--dim);
+            font-size: 1rem;
+            font-style: italic;
+            margin-bottom: 2rem;
+        }
+        .meta {
+            color: var(--dim);
+            font-size: 0.8rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid #333;
+            margin-bottom: 2rem;
+        }
+        h2 {
+            font-size: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 0.1em;
+            margin: 2.5rem 0 1rem;
+            color: var(--accent);
+        }
+        p {
+            color: var(--dim);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+        hr {
+            border: none;
+            border-top: 1px solid #333;
+            margin: 2rem 0;
+        }
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            border-top: 1px solid #333;
+            color: var(--dim);
+            font-size: 0.75rem;
+        }
+        footer a {
+            color: var(--dim);
+            text-decoration: none;
+        }
+        footer a:hover { color: var(--accent); }
+        article a { color: var(--accent); text-decoration: none; }
+        article a:hover { text-decoration: underline; }
+        blockquote {
+            border-left: 2px solid var(--accent);
+            padding-left: 1rem;
+            margin: 1.5rem 0;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <nav class="topnav">
+        <a href="https://canonic-foundation.github.io" class="topnav-brand">CANONIC</a>
+        <div class="topnav-links">
+            <a href="https://canonic-foundation.github.io">Foundation</a>
+            <a href="https://canonic-apps.github.io">Apps</a>
+            <a href="https://canonic-apps.github.io/STORE/" class="active">Store</a>
+            <a href="https://github.com/canonic-apps">GitHub</a>
+        </div>
+    </nav>
+
+    <article>
+        <h1>Twenty Thousand Conversations</h1>
+        <p class="subtitle">What patients taught us about governance</p>
+        <p class="meta">Markets: v0 (MACHINE Era) | ORIGIN/002</p>
+
+        <h2>Bloomberg Summit, 2017</h2>
+        <p>New York City. I'm presenting "Breast We Can!" at the Bloomberg Data for Health Summit. Crowdsourced AI for breast cancer detection. The pitch is simple: patients are generating imaging data. That data could save lives. The system is broken.</p>
+        <p>The room is full of healthcare executives and policy makers. Nobody's built this yet. The technology is emerging. The regulations are unclear. The opportunity is massive.</p>
+        <p>UCF signs on. Western Digital provides storage infrastructure. NIH grants start flowing. $5M+ in funding over the next seven years. Clinical trials at UCSF.</p>
+        <p>We call it MammoChat.</p>
+
+        <hr>
+
+        <h2>Casey DeSantis</h2>
+        <p>2021. Florida's First Lady is diagnosed with breast cancer. She goes public with her journey. The state launches awareness campaigns. The conversation about early detection reaches millions.</p>
+        <p>Meanwhile, MammoChat is quietly logging its ten-thousandth patient conversation. Women across the country, navigating the same fear, the same uncertainty, the same gaps in communication that the healthcare system leaves unfilled.</p>
+        <p>We're not competing with doctors. We're filling the silence between appointments.</p>
+
+        <hr>
+
+        <h2>The Pattern</h2>
+        <p>Twenty thousand conversations later, a pattern emerges.</p>
+        <p>Patients don't need AI to replace their doctors. They need AI to fill the gaps. The 2 AM anxiety. The confusing paperwork. The silence that stretches between "we found something" and "here's what it means."</p>
+        <p>Every conversation generates evidence. Every evidence point needs protection. Every protection needs rules.</p>
+        <p>The rules accumulate. The rules need governance.</p>
+
+        <hr>
+
+        <h2>What We Learned</h2>
+        <p>From twenty thousand conversations:</p>
+        <blockquote>Patients remember how they felt more than what they learned.</blockquote>
+        <p>The information matters. The tone matters more. The consistency matters most.</p>
+        <p>An AI that gives perfect information but varies wildly in approach breeds distrust. An AI that maintains steady presence, clear boundaries, and honest limitations earns something harder to measure: confidence.</p>
+
+        <hr>
+
+        <h2>The Question</h2>
+        <p>How do you ensure that consistency at scale?</p>
+        <p>Not through training alone. Models change. Prompts drift. Teams rotate. The thing that seemed safe yesterday becomes problematic tomorrow.</p>
+        <p>You need something that persists. Something the AI can read. Something humans can audit. Something that doesn't depend on who's watching.</p>
+        <p>You need governance that governs itself.</p>
+
+        <hr>
+
+        <h2>From Patients to Protocol</h2>
+        <p>MammoChat didn't set out to build a governance framework. It set out to help scared women navigate a healthcare system that often fails them.</p>
+        <p>But the conversations demanded it. Each edge case. Each moment where "what should I say?" became "what should <em>anyone</em> say in this situation, forever?"</p>
+        <p>The patients taught us. Every constraint in CANONIC traces back to a real person, a real conversation, a real moment where we learned something couldn't be left to chance.</p>
+
+        <hr>
+
+        <h2>Join Us</h2>
+        <p>Our clinical trials at UCSF are currently enrolling participants. If you or someone you know is navigating breast imaging decisions, MammoChat may be able to help.</p>
+        <p>Learn more at <a href="https://canonic-apps.github.io">canonic-apps.github.io</a> or contact us directly.</p>
+        <p>Twenty thousand conversations. Yours could be next.</p>
+
+        <hr>
+
+        <p class="meta" style="border: none; padding: 0; margin-top: 3rem;">ORIGIN/002 | January 2026</p>
+    </article>
+
+    <footer>
+        <p>CANONIC Store | Part of <a href="https://canonic-foundation.github.io">CANONIC Foundation</a> | January 2026</p>
+    </footer>
+</body>
+</html>

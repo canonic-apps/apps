@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How a Book Became a Language | CANONIC</title>
+    <style>
+        :root {
+            --bg: #000;
+            --fg: #fff;
+            --accent: #00ff88;
+            --dim: #888;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: ui-monospace, 'SF Mono', 'Cascadia Code', Menlo, monospace;
+            background: var(--bg);
+            color: var(--fg);
+            min-height: 100vh;
+        }
+        .topnav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid #333;
+        }
+        .topnav-brand {
+            font-size: 0.9rem;
+            letter-spacing: 0.2em;
+            color: var(--fg);
+            text-decoration: none;
+        }
+        .topnav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        .topnav-links a {
+            color: var(--dim);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.2s;
+        }
+        .topnav-links a:hover { color: var(--accent); }
+        .topnav-links a.active { color: var(--fg); }
+
+        article {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+        h1 {
+            font-size: 2rem;
+            font-weight: 300;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+        }
+        .subtitle {
+            color: var(--dim);
+            font-size: 1rem;
+            font-style: italic;
+            margin-bottom: 2rem;
+        }
+        .meta {
+            color: var(--dim);
+            font-size: 0.8rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid #333;
+            margin-bottom: 2rem;
+        }
+        h2 {
+            font-size: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 0.1em;
+            margin: 2.5rem 0 1rem;
+            color: var(--accent);
+        }
+        p {
+            color: var(--dim);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+        code {
+            background: #111;
+            padding: 0.2rem 0.4rem;
+            font-size: 0.9em;
+        }
+        pre {
+            background: #111;
+            padding: 1rem;
+            overflow-x: auto;
+            margin: 1rem 0;
+            border-left: 2px solid var(--accent);
+        }
+        pre code {
+            background: none;
+            padding: 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 0.85rem;
+        }
+        th, td {
+            border: 1px solid #333;
+            padding: 0.75rem;
+            text-align: left;
+        }
+        th {
+            color: var(--fg);
+        }
+        td {
+            color: var(--dim);
+        }
+        td code {
+            font-size: 0.8rem;
+        }
+        hr {
+            border: none;
+            border-top: 1px solid #333;
+            margin: 2rem 0;
+        }
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            border-top: 1px solid #333;
+            color: var(--dim);
+            font-size: 0.75rem;
+        }
+        footer a {
+            color: var(--dim);
+            text-decoration: none;
+        }
+        footer a:hover { color: var(--accent); }
+        article a { color: var(--accent); text-decoration: none; }
+        article a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <nav class="topnav">
+        <a href="https://canonic-foundation.github.io" class="topnav-brand">CANONIC</a>
+        <div class="topnav-links">
+            <a href="https://canonic-foundation.github.io">Foundation</a>
+            <a href="https://canonic-apps.github.io">Apps</a>
+            <a href="https://canonic-apps.github.io/STORE/" class="active">Store</a>
+            <a href="https://github.com/canonic-apps">GitHub</a>
+        </div>
+    </nav>
+
+    <article>
+        <h1>How a Book Became a Language</h1>
+        <p class="subtitle">The accidental discovery of governance for the LLM era</p>
+        <p class="meta">Markets: v0 (MACHINE Era) | Ledger: <a href="https://github.com/hadleylab-dexter/STORE/tree/main/PAPERS/CANONIC/v0">hadleylab-dexter/STORE/PAPERS/CANONIC/v0/</a></p>
+
+        <h2>The Typo</h2>
+        <p>December 29, 2025. I'm writing a book about precision medicine economics. "Dividends & Deaths" — how medicine extracts value from patient data.</p>
+        <p>Every chapter needs governance. Assets need tracking. The emotional arc needs contracts.</p>
+        <p>I create a file: <code>CANNON.md</code></p>
+        <p>Double-N. A typo.</p>
+        <p>I fix it. <strong>CANON</strong> is born.</p>
+
+        <hr>
+
+        <h2>What Was In That File</h2>
+        <pre><code>## PART-BY-PART CONTRACTS
+- Reader must feel: Shocked, implicated, oriented
+- Exit belief: The system is coherent, profitable, and morally inverted
+
+## Red Lines (Non-Negotiables)
+- Henrietta Lacks is not re-explained after Part II
+- Codes are never portrayed as neutral
+- Equity is defined in outcomes, not intentions</code></pre>
+        <p>"Contracts." "Red Lines." "Exit beliefs."</p>
+        <p>I'm governing narrative. But something clicks.</p>
+
+        <hr>
+
+        <h2>The Insight</h2>
+        <p>A compiler validates code through grammar and types. What if governance worked the same way?</p>
+        <p>Book spine contracts → Constitutional axioms.<br>
+        Red lines → Invariants.<br>
+        Exit beliefs → Validation gates.</p>
+        <p><strong>Governance is a language problem.</strong></p>
+
+        <hr>
+
+        <h2>The Bloat</h2>
+        <p>January 5-19, 2026. I build validators. Define dimensions. Create templates. 163 invention disclosure forms. 9 repositories.</p>
+        <p>The system bloats. It's collapsing under its own weight.</p>
+
+        <hr>
+
+        <h2>The Compression</h2>
+        <p>January 10. The Soft BIG BANG.</p>
+        <p>Everything collapses into three axioms:</p>
+        <pre><code>1. TRIAD — All relation is triadic.
+2. INTROSPECTION — The system validates itself.
+3. INHERITANCE — Constraints flow down. Never weaken.</code></pre>
+        <p>That's it. Everything else derives.</p>
+
+        <hr>
+
+        <h2>What CANONIC Actually Is</h2>
+        <p>In the LLM era:</p>
+        <ul style="color: var(--dim); margin-left: 1.5rem; margin-bottom: 1rem;">
+            <li><strong>LLMs read</strong> governance documents</li>
+            <li><strong>Humans review</strong> governance decisions</li>
+            <li><strong>MACHINE enforces</strong> validated constraints</li>
+        </ul>
+        <p>No single party has complete authority. Governance emerges from the triad.</p>
+        <p>Write it down. The machines read it. The humans review it. The constraints enforce themselves.</p>
+
+        <hr>
+
+        <h2>The Evidence</h2>
+        <table>
+            <tr><th>What</th><th>Where</th></tr>
+            <tr><td>Proto-canonic origin</td><td><a href="https://github.com/HadleyLab/Dividends-and-Deaths/commit/07a5834">Commit <code>07a5834</code></a> (Dec 29, 2025)</td></tr>
+            <tr><td>Book governance</td><td><a href="https://github.com/HadleyLab/Dividends-and-Deaths"><code>HadleyLab/Dividends-and-Deaths</code></a></td></tr>
+            <tr><td>Proto-canonic archive</td><td><a href="https://github.com/canonic-proto"><code>canonic-proto</code> org</a> (29 repos)</td></tr>
+            <tr><td>v0 freeze</td><td><a href="https://github.com/canonic-foundation/canonic/commit/9ec7cc9">Commit <code>9ec7cc9</code></a> (Jan 23, 2026)</td></tr>
+            <tr><td>Paper</td><td><a href="https://github.com/hadleylab-dexter/STORE/tree/main/PAPERS/CANONIC/v0"><code>hadleylab-dexter/STORE/PAPERS/CANONIC/v0/</code></a></td></tr>
+        </table>
+        <p>All verifiable. All immutable.</p>
+
+        <hr>
+
+        <h2>The Backstory (for the curious)</h2>
+        <p>This didn't start in 2025. It started with breast cancer.</p>
+        <p><strong>2017</strong>: Bloomberg Summit, NYC. I present "Breast We Can!" — crowdsourced AI for cancer detection.</p>
+        <p><strong>2017-2024</strong>: $5M+ in NIH/UCSF funding. Western Digital partnership. Clinical trials.</p>
+        <p><strong><a href="https://canonic-apps.github.io">MammoChat</a></strong>: 20,000+ patient encounters. Every conversation generates evidence. Every evidence needs validation. Every validation needs rules.</p>
+        <p>The rules accumulated. The rules needed governance.</p>
+        <p>A book project crystallized the pattern. A typo named it.</p>
+
+        <hr>
+
+        <p class="meta" style="border: none; padding: 0; margin-top: 3rem;">ORIGIN/001 | January 2026<br>Ledger: <a href="https://github.com/TRANSCRIPTverse">TRANSCRIPTverse</a>, <a href="https://github.com/CANONVERSE">CANONVERSE</a>, <a href="https://github.com/canonic-proto">canonic-proto</a></p>
+    </article>
+
+    <footer>
+        <p>CANONIC Store | Part of <a href="https://canonic-foundation.github.io">CANONIC Foundation</a> | January 2026</p>
+    </footer>
+</body>
+</html>

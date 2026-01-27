@@ -1,0 +1,19 @@
+# Credentials - NEVER commit
+.token_cache.json
+gmail_credentials.json
+.device_flow.json
+*.pem
+*.key
+*_secret*.json
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# macOS
+.DS_Store
+
+# IDE
+.vscode/
+.idea/

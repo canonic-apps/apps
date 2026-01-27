@@ -1,0 +1,25 @@
+# CANON Validation Workflow
+# inherits: /CANONIC/LANGUAGE/TEMPLATES/BACKEND/
+
+name: Validate CANON
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Run CANON Validator
+        run: |
+          python3 ~/.canonic/VALIDATORS/canonic_validate.py --tier ENTERPRISE .

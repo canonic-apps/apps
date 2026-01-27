@@ -1,0 +1,34 @@
+# CANONIC APPS Configuration
+# Template-governed VaaS configuration
+
+inherits: /CANONIC/LANGUAGE/TEMPLATES/CONFIG
+
+---
+
+tier: ENTERPRISE
+
+scopes:
+  frontend: "*.github.io"
+  backend: ".github"
+
+templates:
+  - FRONTEND
+  - BACKEND
+  - CONFIG
+
+workspace:
+  root: ~/.canonic
+  directories:
+    - CONFIG
+    - CREDENTIALS
+    - HOOKS
+    - TRANSCRIPTS
+    - VALIDATORS
+
+hooks:
+  pre-commit: WRITING gate (validates CLOSURE)
+  post-commit: TRANSCRIPT sync
+
+validators:
+  required:
+    - canonic_validate.py
