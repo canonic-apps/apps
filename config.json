@@ -1,0 +1,14 @@
+{
+  "tier": 33,
+  "ledger": {
+    "autocommit": true,
+    "badge": "NOTICE",
+    "message": "VaaS [{tier}] {status}",
+    "stage": ["NOTICE"],
+    "triggers": {
+      "pre-commit": false,
+      "post-validation": true,
+      "ci": true
+    }
+  }
+}
