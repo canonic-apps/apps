@@ -1,0 +1,43 @@
+{
+    "title": "CANONIC",
+    "heading": "CANONIC",
+    "tagline": "Constitutional AI Governance",
+    "badge": "FOUNDATION",
+    "sections": [
+        {
+            "title": "CANONVERSE",
+            "subtitle": "One constitution. Infinite implementations.",
+            "type": "grid",
+            "items": [
+                {"title": "APPS", "description": "App Store. ENTERPRISE certified.", "url": "https://canonic-apps.github.io"},
+                {"title": "DOMAINS", "description": "Vertical governance. MEDICINE, LAW, FINANCE.", "url": "https://canonic-domains.github.io"},
+                {"title": "DEXTER", "description": "User #0. First certified dev.", "url": "https://hadleylab-dexter.github.io"}
+            ]
+        },
+        {
+            "title": "ROADMAP",
+            "subtitle": "Each era discovers the next.",
+            "type": "timeline",
+            "items": [
+                {"title": "v0 ORIGIN", "description": "Dec 2025. Three axioms. Fixed point."},
+                {"title": "v1 MACHINE", "description": "Jan 2026. VaaS operational. Spec frozen."},
+                {"title": "v2 FOUNDATION", "description": "Now. App Store live. $100 certification.", "active": true},
+                {"title": "v3 DISTRIBUTED", "description": "Next. Network scales. Certified devs everywhere."}
+            ]
+        },
+        {
+            "title": "AXIOMS",
+            "subtitle": "Everything derives from three.",
+            "type": "grid",
+            "items": [
+                {"title": "TRIAD", "description": "D∩O∩S. Data, Ops, Spec."},
+                {"title": "INTROSPECTION", "description": "CANON(CANON). Self-governing."},
+                {"title": "INHERITANCE", "description": "Downstream inherits upstream."}
+            ]
+        }
+    ],
+    "footer_links": [
+        {"text": "Apps", "url": "https://canonic-apps.github.io"},
+        {"text": "GitHub", "url": "https://github.com/canonic-foundation"}
+    ]
+}

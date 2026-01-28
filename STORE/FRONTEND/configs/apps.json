@@ -1,0 +1,43 @@
+{
+    "title": "CANONIC Apps",
+    "heading": "CANONIC APPS",
+    "tagline": "ENTERPRISE Certified Software",
+    "badge": "APP STORE",
+    "sections": [
+        {
+            "title": "PAPERS",
+            "subtitle": "The roadmap as evidence.",
+            "type": "flow",
+            "items": [
+                {"title": "v0 ORIGIN"},
+                {"title": "v1 MACHINE"},
+                {"title": "v2 FOUNDATION", "active": true},
+                {"title": "v3 DISTRIBUTED", "dim": true}
+            ]
+        },
+        {
+            "title": "STORE",
+            "subtitle": "Governed distribution.",
+            "type": "grid",
+            "items": [
+                {"title": "APPS", "description": "Software applications. VaaS validated.", "url": "/STORE/APPS/"},
+                {"title": "BOOKS", "description": "Publications. Constitutional writing.", "url": "/STORE/BOOKS/"},
+                {"title": "PAPERS", "description": "Research. Evidence chain.", "url": "/STORE/PAPERS/"}
+            ]
+        },
+        {
+            "title": "CERTIFICATION",
+            "subtitle": "$100/year. ENTERPRISE badge.",
+            "type": "grid",
+            "items": [
+                {"title": "CERTIFY", "description": "$100 annual fee. VaaS validation."},
+                {"title": "PUBLISH", "description": "Apps get ENTERPRISE badge."},
+                {"title": "GROW", "description": "Certs → apps → badges → trust → growth."}
+            ]
+        }
+    ],
+    "footer_links": [
+        {"text": "Foundation", "url": "https://canonic-foundation.github.io"},
+        {"text": "GitHub", "url": "https://github.com/canonic-apps"}
+    ]
+}

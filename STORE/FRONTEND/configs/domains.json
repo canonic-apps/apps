@@ -1,0 +1,44 @@
+{
+    "title": "CANONIC Domains",
+    "heading": "CANONIC DOMAINS",
+    "tagline": "Vertical Governance",
+    "badge": "DOMAINS",
+    "sections": [
+        {
+            "title": "DOMAIN ZERO",
+            "subtitle": "CANONIC governs CANONIC.",
+            "type": "grid",
+            "items": [
+                {"title": "CANONIC", "description": "The first domain. Self-governing. Fixed point.", "url": "https://canonic-foundation.github.io", "active": true}
+            ]
+        },
+        {
+            "title": "VERTICAL DOMAINS",
+            "subtitle": "Domain-specific governance.",
+            "type": "grid",
+            "items": [
+                {"title": "MEDICINE", "description": "Clinical governance. Oncology. Psychiatry."},
+                {"title": "LAW", "description": "Legal governance. Contracts. Compliance."},
+                {"title": "FINANCE", "description": "Asset governance. Audit trails."}
+            ]
+        },
+        {
+            "title": "DETROS",
+            "subtitle": "The six dimensions.",
+            "type": "grid",
+            "items": [
+                {"title": "D", "description": "DECLARATIVE. What is stated."},
+                {"title": "E", "description": "EVIDENTIAL. What is proven."},
+                {"title": "T", "description": "TEMPORAL. When it happened."},
+                {"title": "R", "description": "RELATIONAL. How things connect."},
+                {"title": "O", "description": "OPERATIONAL. How it runs."},
+                {"title": "S", "description": "STRUCTURAL. How it's organized."}
+            ]
+        }
+    ],
+    "footer_links": [
+        {"text": "Foundation", "url": "https://canonic-foundation.github.io"},
+        {"text": "Apps", "url": "https://canonic-apps.github.io"},
+        {"text": "GitHub", "url": "https://github.com/canonic-domains"}
+    ]
+}

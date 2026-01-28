@@ -1,0 +1,43 @@
+{
+    "title": "DEXTER",
+    "heading": "DEXTER",
+    "tagline": "CANONIC #0 | First Certified Dev",
+    "badge": "ENTERPRISE",
+    "sections": [
+        {
+            "title": "STORE",
+            "subtitle": "Publications. Evidence. Distribution.",
+            "type": "grid",
+            "items": [
+                {"title": "APPS", "description": "Private applications.", "url": "/STORE/APPS/"},
+                {"title": "BOOKS", "description": "Publications. Manuscripts.", "url": "/STORE/BOOKS/"},
+                {"title": "PAPERS", "description": "Research. Whitepapers.", "url": "/STORE/PAPERS/"}
+            ]
+        },
+        {
+            "title": "HOLDINGS",
+            "subtitle": "ENTERPRISE assets.",
+            "type": "grid",
+            "items": [
+                {"title": "IP", "description": "Patents. Disclosures.", "url": "/HOLDINGS/"},
+                {"title": "COMPANIES", "description": "Corporate structures.", "url": "/HOLDINGS/"},
+                {"title": "FINANCIALS", "description": "Treasury. Tokenomics.", "url": "/HOLDINGS/"}
+            ]
+        },
+        {
+            "title": "THE TEMPLATE",
+            "subtitle": "Every user inherits this structure.",
+            "type": "grid",
+            "items": [
+                {"title": "STORE/", "description": "Required. Distribution channel."},
+                {"title": "HOLDINGS/", "description": "Optional. Ownership. Assets."},
+                {"title": "EVIDENCE/", "description": "Optional. Attestation. Proof."}
+            ]
+        }
+    ],
+    "footer_links": [
+        {"text": "Foundation", "url": "https://canonic-foundation.github.io"},
+        {"text": "Apps", "url": "https://canonic-apps.github.io"},
+        {"text": "GitHub", "url": "https://github.com/hadleylab-dexter"}
+    ]
+}
