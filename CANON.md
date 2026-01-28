@@ -1,6 +1,7 @@
 # CANONIC APPS — CANON
 
 inherits: /CANONIC/
+tier: ENTERPRISE
 series: *.md
 
 ---
