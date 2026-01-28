@@ -1,7 +1,7 @@
 # CANONIC APPS — CANON
 
 inherits: /CANONIC/
-tier: ENTERPRISE
+tier: 63
 series: *.md
 
 ---
@@ -30,13 +30,14 @@ series: *.md
 
 ---
 
-## TIERS
+## COMPLIANCE
 
-| Tier | Access | Revenue |
-|------|--------|---------|
-| COMMUNITY | Free | COIN. Scale. |
-| BUSINESS | Subscription | 5%. TOKEN. Sell. |
-| ENTERPRISE | Contract | 10%. TOKEN. Sell + VaaS. |
+| Level | Binary | Access | Revenue |
+|-------|--------|--------|---------|
+| CLOSURE | 33 | Minimal | Base. |
+| COMMUNITY | 35 | Free | COIN. Scale. |
+| BUSINESS | 39 | Subscription | 5%. TOKEN. |
+| ENTERPRISE | 63 | Contract | 10%. TOKEN + VaaS. |
 
 ---
 
