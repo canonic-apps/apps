@@ -1,0 +1,11 @@
+%%{init: {"themeVariables": {"fontSize": "10pt"}}}%%
+flowchart LR
+    subgraph Governance
+        CANON[CANON<br/>Rules] --> MACHINE[MACHINE<br/>Validation]
+    end
+    subgraph Execution
+        AGENT[Agents<br/>+ Humans] --> ARTIFACTS[Artifacts]
+        ARTIFACTS --> MACHINE
+    end
+    MACHINE --> LEDGER[LEDGER<br/>Immutable<br/>commit history]
+    LEDGER --> PAPER[PAPER<br/>Claims<br/>+ citations]

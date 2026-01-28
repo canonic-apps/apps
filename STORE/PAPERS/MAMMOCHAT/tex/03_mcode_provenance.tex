@@ -1,0 +1,88 @@
+% ============================================================
+% 03_mcode_provenance.tex
+% ============================================================
+
+\section{mCODE and Provenance: The Grammar of Cancer Data}
+\label{sec:mcode-provenance}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.98\textwidth]{mCODE_STU2.png}
+  \caption{Structure of the mCODE (STU 2) information model used by MammoChat to translate unstructured oncology records into standardized, interoperable data. The schema aligns core FHIR resources across diagnosis, genomics, therapy, and outcomes to enable cross-institutional research and patient-controlled data sharing.}
+  \label{fig:mcode_schema}
+\end{figure}
+
+Every language has grammar-the rules that give meaning to words. In cancer care, that grammar is called \textbf{mCODE}, the \textit{Minimal Common Oncology Data Elements}. It defines how tumors, treatments, and outcomes are described in digital form. Without mCODE, oncology data remain fragmented, unreadable, and ultimately unusable for large-scale precision medicine.
+
+\textbf{The Architecture of mCODE.}
+mCODE provides a standardized schema for representing every measurable aspect of cancer-tumor type, histology, receptor status, staging (TNM), procedures, medications, biomarkers, genomic variants, outcomes, and imaging.
+Each field in mCODE is interoperable with \textbf{FHIR (Fast Healthcare Interoperability Resources)}-the API standard that connects modern EHRs and research databases.
+Where FHIR provides the syntax, mCODE provides the semantics-the shared meaning of the words in the medical sentence.
+
+By design, mCODE is \textit{disease-agnostic yet cancer-specific}.
+It can represent a breast lesion, a colon biopsy, or a melanoma recurrence with equal fidelity.
+MammoChat extends this framework to include breast-specific data elements: mammographic density, BI-RADS classification, pathology subtypes, and genomic signatures (HER2, ER/PR, BRCA).
+These data elements are not stored as free text; they are structured, coded, and cryptographically signed.
+
+\textbf{From Structure to Provenance.}
+Structure alone is not trust.
+To ensure integrity, every mCODE object is registered on the \textbf{OPTS-EGO Ledger}-a cryptographic layer that provides verifiable provenance for each data element.
+
+For each record $i$, we define an \textit{Open Provenance Token Standard (OPTS)} object:
+\[
+\mathrm{OPTS}_i = (D_i, M_i, \sigma_i, \tau_i)
+\]
+where $D_i$ is the content-addressed hash of the encrypted payload, $M_i$ is metadata conforming to mCODE/FHIR, $\sigma_i$ is the patient's digital signature, and $\tau_i$ is a timestamp of consent.
+The ledger is governed by \textbf{Ethical Governance Operators (EGO)}-validators representing trusted clinical institutions, community stakeholders, and patients themselves.
+
+Each transaction on the ledger creates an immutable proof:
+\[
+L_{t+1} = \mathrm{Keccak256}(L_t \,\|\, \mathrm{Tx}_t)
+\]
+which ensures that once a record is written, it cannot be altered without detection.
+A patient's consent event is represented by a hash $H_i = \mathrm{SHA3}(D_i \,\|\, M_i \,\|\, \sigma_i)$ and validated through a zero-knowledge proof $Z_i = \mathrm{ZKVerify}(H_i, \sigma_i, P_i)$, verifying policy compliance without revealing personal health information.
+
+\textbf{Why Provenance Matters.}
+Provenance means knowing where data came from, who touched it, and whether it can be trusted.
+In medicine, provenance prevents not only fraud but also invisibility-ensuring that the contributions of patients, clinicians, and funders are recorded forever.
+In research, it prevents data drift and model bias.
+In patient care, it ensures that results are reproducible, auditable, and portable.
+And for Maria, it means her imaging and biopsy data will never again be lost in translation.
+
+\textbf{Intersections of mCODE and Blockchain.}
+MammoChat bridges clinical semantics and cryptographic assurance.
+mCODE describes the data; OPTS-EGO proves its origin.
+This combination allows each element of Maria's care-from a mammogram pixel to a pathology note-to exist as both a clinical artifact and a verified digital asset.
+
+\begin{figure}
+\centering
+\resizebox{\linewidth}{!}{%
+\begin{tikzpicture}[node distance=1.0cm, >=latex]
+\tikzstyle{n}=[rectangle, draw=slate, fill=mammoPink!10, rounded corners, minimum width=6em, minimum height=1.6em]
+\node[n] (mcode) {mCODE Object};
+\node[n, right=2cm of mcode] (opts) {OPTS Token};
+\node[n, right=2cm of opts] (ego) {EGO Ledger};
+\draw[->, thick] (mcode) -- node[above]{hash \& sign} (opts);
+\draw[->, thick] (opts) -- node[above]{record \& verify} (ego);
+\end{tikzpicture}}
+\caption{Intersection of mCODE and OPTS-EGO: from structure to provenance.}
+\label{fig:4}
+\end{figure}
+
+In practical terms, this architecture allows a hospital, lab, or AI developer to verify the lineage of any dataset before using it in a model. If a researcher trains an algorithm on a de-identified mCODE dataset, the OPTS-EGO Ledger ensures that every contributor s consent and attribution remain intact-a transparent chain of trust.
+
+\textbf{Provenance as Public Good\autocite{prainsack2023book}.}
+Through the \$2 M \textbf{Casey DeSantis Florida Cancer Innovation Grant}, each open-source deliverable-code, schema, or model-is registered as an OPTS-Grant token.
+This ensures that state-funded innovation remains accessible while crediting its original investigators.
+In doing so, MammoChat creates a living repository of reproducible research, where provenance is not a legal burden but a scientific advantage.
+
+\textbf{From Provenance to Ownership.}
+In the emerging precision-medicine economy, data itself is the primary resource\autocite{khorfan2018meta}.
+By combining mCODE with OPTS-EGO, MammoChat transforms that resource into a renewable asset owned by the people who generate it.
+Each time a patient contributes data to a study, their consent creates a transaction; each transaction can yield recognition, royalties, or research participation opportunities.
+
+\begin{quote}\centering
+\textit{ Structure without provenance is information; provenance with consent is power. }
+\end{quote}
+
+Through standardization, security, and empathy, mCODE and OPTS-EGO together define not just how we record cancer, but how we remember the people behind it.

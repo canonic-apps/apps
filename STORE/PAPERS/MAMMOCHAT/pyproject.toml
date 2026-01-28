@@ -1,0 +1,43 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "white-paper-pipeline"
+version = "0.1.0"
+description = "Publication-ready LaTeX pipeline with inline citations and Nature-style formatting"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [
+  { name = "Dexter Hadley" },
+  { name = "Contributors" }
+]
+keywords = ["latex", "biblatex", "pipeline", "citations", "publication", "nature"]
+dependencies = [
+  "bibtexparser>=1.4.0",
+  "PyYAML>=6.0",
+  "scikit-learn>=1.3",
+  "numpy>=1.23",
+  "scipy>=1.10",
+  "requests>=2.31",
+  "click>=8.0.0",
+  "structlog>=23.0.0"
+]
+
+[project.scripts]
+wp = "main:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["*"]
+
+[tool.black]
+line-length = 100
+target-version = ["py39", "py310", "py311"]
+
+[tool.ruff]
+line-length = 100
+select = ["E", "F", "I", "UP"]
+ignore = []
+fix = true

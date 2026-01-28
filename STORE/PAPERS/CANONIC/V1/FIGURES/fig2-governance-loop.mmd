@@ -1,0 +1,22 @@
+%%{init: {"themeVariables": {"fontSize": "10pt"}}}%%
+graph TD
+    subgraph "Human Authority"
+        H[Human] -->|declares| CANON[CANON<br/>Constitution]
+        H -->|freezes| LEDGER[LEDGER<br/>Immutable<br/>Record]
+    end
+
+    subgraph "AI Production"
+        AI[AI<br/>Agent] -->|produces| CANDIDATES[Candidate<br/>Artifacts]
+        CANDIDATES -->|evaluated by| MACHINE[MACHINE<br/>Validator]
+    end
+
+    CANON -->|governs| MACHINE
+    MACHINE -->|accept/<br/>reject| LEDGER
+    LEDGER -->|evidence for| PAPER[PAPER<br/>This Document]
+
+    AI -.->|observes,<br/>cannot change| CANON
+
+    style CANON fill:#e1f5fe
+    style LEDGER fill:#fff3e0
+    style PAPER fill:#e8f5e9
+    style H fill:#fce4ec

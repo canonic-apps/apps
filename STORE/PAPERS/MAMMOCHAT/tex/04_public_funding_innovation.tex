@@ -1,0 +1,100 @@
+% ============================================================
+% 04_public_funding_innovation.tex
+% ============================================================
+
+\section{Public Funding Provenance Innovation}
+\label{sec:public-funding}
+Public investment in science is society s boldest act of faith.
+Every grant carries an expectation that knowledge created with public dollars should, in turn, serve the public good.
+Yet for decades, tracing where that knowledge goes - and who benefits - has remained opaque.
+MammoChat's \textbf{OPTS-EGO Ledger} transforms this expectation into a measurable framework: every publicly funded deliverable becomes a verified, reusable, and attributable digital artifact.
+
+\textbf{The Casey DeSantis Florida Cancer Innovation Grant.}
+In 2025, the State of Florida awarded a \$2 M Cancer Innovation Grant under the leadership of First Lady Casey DeSantis.
+The grant s objective: to accelerate translation of digital health innovation into community cancer prevention and survivorship.
+Its mandate was explicit - all resulting code, datasets, and intellectual outputs must be made open source and accessible to the public.
+
+For many institutions, this requirement is administrative; for MammoChat, it became a design principle.
+Each deliverable is now minted as an \textbf{OPTS-Grant Token} - a cryptographic certificate that records authorship, funding source, and time of creation.
+
+\textbf{The Provenance Chain of a Grant Deliverable.}
+
+\begin{figure}
+\centering
+\resizebox{0.95\textwidth}{!}{%
+\begin{tikzpicture}[node distance=1.4cm, >=Latex]
+\tikzstyle{n}=[rectangle, draw=slate, fill=mammoPink!10,
+rounded corners, minimum width=8em, minimum height=1.8em, text centered]
+
+\node[n] (fund) {Public Funding};
+\node[n, right=3.2cm of fund] (research) {Research Output};
+\node[n, right=3.2cm of research] (token) {OPTS--Grant Token};
+\node[n, right=3.2cm of token] (reuse) {Innovation Reuse};
+\node[n, right=3.2cm of reuse] (benefit) {Patient Benefit};
+
+\draw[->, thick] (fund) -- node[above]{\small Award + Conditions} (research);
+\draw[->, thick] (research) -- node[above]{\small Hash + Sign} (token);
+\draw[->, thick] (token) -- node[above]{\small Register + Cite} (reuse);
+\draw[->, thick] (reuse) -- node[above]{\small Deploy + Measure} (benefit);
+\end{tikzpicture}}
+\caption{Lifecycle of a publicly funded deliverable within the OPTS--EGO Ledger. Each stage builds accountability: from public investment to measurable patient benefit.}
+\end{figure}
+
+Every dataset, model, or line of code is hashed using SHA-3, signed by its principal investigator, and recorded as an immutable entry on the ledger The result is a transparent and permanent record linking public investment to scientific and clinical benefit.
+
+\textbf{Transparency by Design.}
+Traditional reporting models rely on periodic progress summaries and post-hoc compliance checks
+The OPTS-Grant Registry replaces this with continuous verification.
+Each ledger entry contains:
+\begin{itemize}
+ \item the funding source (e.g., State of Florida Cancer Innovation Program);
+ \item the principal investigator s digital signature;
+ \item the SHA-3 hash of the deliverable (e.g., code repository, dataset);
+ \item metadata describing the scope, license, and version;
+ \item timestamps for creation and publication.
+\end{itemize}
+
+Anyone - auditor, policymaker, or patient - can confirm that a deliverable funded by public money has been created, shared, and preserved.
+This moves transparency from legal compliance to cryptographic proof.
+
+\textbf{MammoChat's Demonstration Deliverables.}
+\begin{itemize}
+ \item \textbf{D1 - mCODE Translator:} converts unstructured clinical text and imaging metadata into mCODE-compliant JSON.
+ \item \textbf{D2 - Community Empathy Model:} a multilingual conversational agent trained to deliver emotional support aligned with medical literacy standards.
+ \item \textbf{D3 - OPTS-EGO Prototype Ledger:} open-source blockchain module for consent recording and provenance tracking.
+\end{itemize}
+
+Each is registered as an OPTS-Grant Token with open access for reuse by clinicians, developers, and patient advocates.
+
+\textbf{Ethical Governance and Attribution.}
+In traditional academia, authorship disputes and data hoarding often limit collaboration
+By contrast, OPTS-Grant Tokens formalize credit at the level of contribution.
+If a future startup or research team reuses MammoChat's open-source components, attribution and citation are built into the ledger itself.
+The result is a self-auditing ecosystem that rewards openness rather than secrecy.\autocite{goldfarb2019book}
+
+\textbf{Economic Flow.}
+The model also closes the loop between public funding and patient benefit.
+
+\medskip
+\noindent
+\begin{minipage}{\linewidth}
+\raggedright
+\textit{Public Investment} $\rightarrow$
+\textit{Open Deliverables} $\rightarrow$
+\textit{Innovation Reuse} $\rightarrow$
+\textit{Improved Outcomes} $\rightarrow$
+\textit{Public Trust.}
+\end{minipage}
+
+\medskip
+Every reuse generates measurable social and economic return, documented through ledger analytics rather than grant reports.
+
+\textbf{Why It Matters.}
+When patients like Maria and Zaida access a tool built with state funds, they become part of a transparent continuum - one where their participation feeds directly back into the system that supported them.
+The \$2 M Casey DeSantis Grant thus serves as both catalyst and proof-of-concept: a living example of how provenance transforms public spending into perpetual innovation.
+Therefore, any similar public-facing reporting, evidence, or evaluation frameworks may adopt our open-source approach to achieve transparent operational efficiency.
+
+\begin{quote}\centering
+\textit{ Public trust is the ultimate currency of healthcare.
+Provenance is how we earn it back. }
+\end{quote}

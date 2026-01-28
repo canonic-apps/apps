@@ -1,0 +1,146 @@
+% preamble.tex
+% ===============================================
+% MammoChat OPTS-EGO Ledger: The Empathy Edition
+% Preamble and Style Definitions
+% ===============================================
+
+% === Document Setup ===
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[
+  style=nature,
+  backend=biber,
+  sorting=none,
+  sortcites=true,
+  autocite=superscript,
+  maxcitenames=2,
+  mincitenames=1
+]{biblatex}
+\addbibresource{refs.bib}
+
+% Fix for missing \blx@bbl@data command
+\makeatletter
+\providecommand{\blx@bbl@data}[1]{}
+\makeatother
+
+\usepackage{setspace}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{titlesec}
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+% Fix for missing font shapes
+\DeclareFontShape{T1}{cmss}{b}{n}{<->ssub*cmss/bx/n}{}
+\DeclareFontShape{TS1}{cmss}{b}{n}{<->ssub*cmss/bx/n}{}
+% === Page Geometry ===
+\usepackage[a4paper,margin=1in]{geometry}
+\setlength{\columnsep}{1cm}
+
+% === Colors and Branding ===
+\usepackage{xcolor}
+\definecolor{mammoPink}{HTML}{F8C7CF}
+\definecolor{slate}{HTML}{4B5563}
+\definecolor{linkblue}{HTML}{1B4F72}
+
+% === Graphics and Diagrams ===
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, shapes, positioning, calc}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{cuted}
+
+% === Tables and Math ===
+\usepackage{amsmath, amssymb}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{siunitx}
+% Consistent numeric formatting (US style) and clean ranges
+\sisetup{
+  group-separator = {,},
+  group-minimum-digits = 4,
+  output-decimal-marker = {.},
+  range-phrase = {\text{--}},
+  range-units = single,
+  per-mode = symbol,
+  parse-numbers = true,
+  detect-all = true
+}
+
+% === References and Hyperlinks ===
+\usepackage{hyperref}
+\hypersetup{
+    unicode=true,
+    colorlinks=true,
+    linkcolor=linkblue,
+    citecolor=linkblue,
+    urlcolor=linkblue,
+    pdftitle={MammoChat OPTS–EGO Ledger: The Empathy Edition},
+    pdfauthor={Dexter Hadley, MD/PhD},
+    pdfsubject={Empathy Architecture, Provenance, Blockchain, Breast Health},
+    pdfkeywords={MammoChat, OPTS–EGO, mCODE, Provenance, Breast Cancer, AI, Blockchain, Empathy}
+}
+
+% Sanitize PDF string representations for special commands/characters
+\pdfstringdefDisableCommands{%
+  \def\texttrademark{TM}%
+  \def\autocite#1{}%
+  \def\textemdash{-}%
+}
+
+% === Formatting ===
+\renewcommand{\baselinestretch}{1.2}
+\setlength{\parskip}{0.8em}
+\setlength{\parindent}{0pt}
+
+% === Section Styling ===
+\usepackage{titlesec}
+\titleformat{\section}
+  {\color{slate}\Large\bfseries}
+  {\thesection.}{0.5em}{}
+\titleformat{\subsection}
+  {\color{slate}\large\bfseries}
+  {\thesubsection}{0.5em}{}
+
+% === Header / Footer ===
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\textcolor{slate}{\textbf{MammoChat\texttrademark}}}
+\fancyhead[R]{\textcolor{mammoPink}{\textbf{The Empathy Edition}}}
+\fancyfoot[C]{\textcolor{slate}{\small MammoChat.com — Your Journey, Together. \quad Page \thepage}}
+
+% === Balance Columns and Line Breaking ===
+% \usepackage{balance} % Not available in BasicTeX
+\usepackage{ragged2e}
+
+% === Boxes & Lists (for vignettes) ===
+\usepackage[most]{tcolorbox} % colored vignette boxes with all features (enhanced, breakable, etc.)
+\usepackage{placeins}        % \FloatBarrier if needed
+\usepackage{enumitem}        % compact lists inside boxes
+\setlist[itemize]{itemsep=2pt, topsep=2pt, parsep=0pt, partopsep=0pt, leftmargin=*}
+
+% --- Vignette Box Style (used by dual case drop-in) ---
+\tcbset{
+  redvignette/.style={
+    enhanced,
+    colback=red!1,
+    colframe=red!60!black,
+    boxrule=0.6pt,
+    arc=2pt,
+    left=4pt, right=4pt, top=3pt, bottom=3pt,
+    fonttitle=\bfseries\small,
+    coltitle=white,
+    title={#1},
+    halign=justify, valign=top
+  }
+}
+
+% === Branding Note ===
+% This preamble provides the MammoChat.com visual identity and the vignette box style.
+% Use with main.tex:
+% \documentclass[11pt,twoside]{article}    or \documentclass[10pt,twocolumn]{article}
+% \input{preamble}

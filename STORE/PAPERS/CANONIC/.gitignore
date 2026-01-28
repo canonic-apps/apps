@@ -1,0 +1,14 @@
+.DS_Store
+output/mermaid-images/
+mermaid-images/
+
+.transcripts/
+
+.*
+
+# Exceptions (tracked dotpaths)
+!.gitignore
+!.githooks/
+!.githooks/**
+!.github/
+!.github/**

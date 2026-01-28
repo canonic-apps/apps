@@ -1,0 +1,78 @@
+# Pipeline Configuration
+# Settings for publication-ready LaTeX document generation
+
+# Bibliography file
+bib_file: refs.bib
+
+# Main LaTeX file
+main_tex: main.tex
+
+# Preamble file
+preamble: preamble.tex
+
+# TeX files to process (empty = auto-detect all .tex files)
+tex_files: []
+
+# Output directory
+output_dir: .
+
+# Create backups before modifications
+backup: true
+
+# Metadata fetching settings
+metadata:
+  # Rate limit: seconds between API requests (0.34 = ~3 req/sec)
+  rate_limit: 0.34
+  
+  # Maximum retry attempts for failed requests
+  max_retries: 3
+  
+  # Fetch abstracts from APIs
+  fetch_abstracts: true
+
+# Unicode cleaning settings
+unicode:
+  # Preserve typographically valuable Unicode (en dashes, em dashes, smart quotes)
+  # Set to false for aggressive ASCII-only mode
+  preserve_typography: true
+  
+  # Aggressive mode: replace ALL non-ASCII with ASCII equivalents
+  aggressive: false
+
+# Citation management settings
+citation:
+  # Use OpenAI LLM for precision sentence-level placement
+  use_llm: false
+  
+  # OpenAI API key (set in environment or here)
+  # Get from: https://platform.openai.com/api-keys
+  openai_api_key: null
+  
+  # Minimum TF-IDF similarity threshold for citation placement
+  # Range: 0.0 to 1.0 (higher = more selective)
+  similarity_threshold: 0.1
+
+# Validation settings
+validation:
+  # Check for citations in moving arguments (section titles, captions, etc.)
+  check_moving_args: true
+  
+  # Check for sequential citations that should be consolidated
+  check_consolidation: true
+  
+  # Check typography (ranges, number formatting)
+  check_typography: true
+  
+  # Check Nature journal style compliance
+  check_nature_style: true
+
+# Compilation settings
+compilation:
+  # LaTeX engine (pdflatex, xelatex, lualatex)
+  engine: pdflatex
+  
+  # Run biber for bibliography
+  biber: true
+  
+  # Number of LaTeX passes (minimum 2 for biber, 3 recommended)
+  passes: 3

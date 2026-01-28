@@ -1,0 +1,42 @@
+% Generated style definitions for mammochat brand
+% Generated on: Sun Nov  9 16:07:10 EST 2025
+
+% === Colors and Branding ===
+\usepackage{xcolor}
+\definecolor{mammoPink}{HTML}{F8C7CF}
+\definecolor{slate}{HTML}{4B5563}
+\definecolor{linkblue}{HTML}{1B4F72}
+
+% === Section Styling ===
+\usepackage{titlesec}
+\titleformat{\section}
+  {{\color{slate}\Large\bfseries}}
+  {\thesection.}{0.5em}{}
+\titleformat{\subsection}
+  {{\color{slate}\large\bfseries}}
+  {\thesubsection}{0.5em}{}
+
+% === Header / Footer ===
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\textcolor{slate}{\textbf{MammoChat\texttrademark}}}
+\fancyhead[R]{\textcolor{mammo_pink}{\textbf{The Empathy Edition}}}
+\fancyfoot[C]{\textcolor{slate}{\small MammoChat.com — Your Journey, Together. \quad Page \thepage}}
+
+% === Vignette Box Style ===
+\usepackage[most]{tcolorbox}
+\tcbset{
+  redvignette/.style={
+    enhanced,
+    colback=red!1,
+    colframe=red!60!black,
+    boxrule=0.6pt,
+    arc=2pt,
+    left=4pt, right=4pt, top=3pt, bottom=3pt,
+    fonttitle=\bfseries\small,
+    coltitle=white,
+    title={#1},
+    halign=justify, valign=top
+  }
+}
