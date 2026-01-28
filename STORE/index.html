@@ -4,137 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CANONIC Store | Apps, Papers, Books</title>
-    <style>
-        :root {
-            --bg: #000;
-            --fg: #fff;
-            --accent: #00ff88;
-            --dim: #888;
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: ui-monospace, 'SF Mono', 'Cascadia Code', Menlo, monospace;
-            background: var(--bg);
-            color: var(--fg);
-            min-height: 100vh;
-        }
-        .topnav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 2rem;
-            border-bottom: 1px solid #333;
-        }
-        .topnav-brand {
-            font-size: 1.4rem;
-            color: var(--accent);
-            text-decoration: none;
-            font-weight: 300;
-        }
-        .topnav-links {
-            display: flex;
-            gap: 2rem;
-        }
-        .topnav-links a {
-            color: var(--dim);
-            text-decoration: none;
-            font-size: 0.85rem;
-            transition: color 0.2s;
-        }
-        .topnav-links a:hover { color: var(--accent); }
-        .topnav-links a.active { color: var(--fg); }
-
-        .hero {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 4rem 2rem;
-            text-align: center;
-        }
-        .logo {
-            width: 100%;
-            max-width: 280px;
-            margin-bottom: 2rem;
-            filter: invert(1);
-        }
-        h1 {
-            font-size: 2rem;
-            font-weight: 300;
-            letter-spacing: 0.3em;
-            margin-bottom: 0.5rem;
-        }
-        .tagline {
-            color: var(--dim);
-            font-size: 1rem;
-            letter-spacing: 0.1em;
-            margin-bottom: 2rem;
-        }
-
-        .section {
-            padding: 3rem 2rem;
-            border-top: 1px solid #333;
-        }
-        .section-title {
-            text-align: center;
-            font-size: 0.85rem;
-            letter-spacing: 0.3em;
-            color: var(--dim);
-            margin-bottom: 2rem;
-        }
-
-        .store-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-        .store-card {
-            border: 1px solid #333;
-            padding: 1.5rem;
-            transition: border-color 0.2s;
-        }
-        .store-card:hover { border-color: var(--accent); }
-        .store-card h3 {
-            font-size: 1rem;
-            letter-spacing: 0.15em;
-            margin-bottom: 0.5rem;
-        }
-        .store-card p {
-            color: var(--dim);
-            font-size: 0.8rem;
-            line-height: 1.5;
-            margin-bottom: 1rem;
-        }
-        .store-card a {
-            color: var(--fg);
-            text-decoration: none;
-            font-size: 0.75rem;
-            letter-spacing: 0.1em;
-            padding: 0.5rem 1rem;
-            border: 1px solid var(--fg);
-            display: inline-block;
-            transition: all 0.2s;
-        }
-        .store-card a:hover {
-            background: var(--fg);
-            color: var(--bg);
-        }
-
-        footer {
-            text-align: center;
-            padding: 3rem 2rem;
-            border-top: 1px solid #333;
-            color: var(--dim);
-            font-size: 0.75rem;
-        }
-        footer a {
-            color: var(--dim);
-            text-decoration: none;
-        }
-        footer a:hover { color: var(--accent); }
-    </style>
+    <link rel="stylesheet" href="https://canonic-foundation.github.io/assets/style.css">
 </head>
 <body>
     <nav class="topnav">
@@ -142,165 +12,75 @@
         <div class="topnav-links">
             <a href="https://canonic-foundation.github.io">Foundation</a>
             <a href="https://canonic-apps.github.io">Apps</a>
-            <a href="/STORE/" class="active">Store</a>
-            <a href="https://github.com/canonic-apps">GitHub</a>
+            <a href="./" class="active">Store</a>
         </div>
     </nav>
 
     <section class="hero">
-        <h1>CANONIC STORE</h1>
-        <p class="tagline">Apps, Papers, Books</p>
+        <div class="symbol">∩</div>
+        <h1>STORE</h1>
+        <p class="tagline">Apps. Papers. Books.</p>
     </section>
 
     <section class="section">
         <h2 class="section-title">SYSTEM APPS</h2>
-        <div class="store-grid">
-            <div class="store-card">
+        <div class="grid">
+            <a href="https://canonic-apps.github.io/AGENT/" class="card">
                 <h3>AGENT</h3>
-                <p>Entry point to CANONVERSE. L0 System App. GitHub auth, governance acceptance.</p>
-                <a href="https://canonic-foundation.github.io/AGENT/">Launch</a>
-            </div>
-            <div class="store-card">
+                <p>Entry point to CANONVERSE. GitHub auth, governance acceptance.</p>
+            </a>
+            <a href="https://canonic-apps.github.io/CHAT/" class="card">
                 <h3>CHAT</h3>
-                <p>Self-governance. The AI that governs itself by the constraints it enforces.</p>
-                <a href="https://canonic-foundation.github.io/CHAT/">Launch</a>
-            </div>
-            <div class="store-card">
+                <p>Self-governance. The AI that governs itself.</p>
+            </a>
+            <a href="https://canonic-apps.github.io/EVOLUTION/" class="card">
                 <h3>EVOLUTION</h3>
-                <p>Emergence tracking. Your governance evolution over time.</p>
-                <a href="https://canonic-foundation.github.io/EVOLUTION/">Launch</a>
-            </div>
+                <p>LEDGER walker. COVERAGE + ROADMAP + Visualization.</p>
+            </a>
         </div>
     </section>
 
     <section class="section">
-        <h2 class="section-title">OFFICE APPS</h2>
-        <div class="store-grid">
-            <div class="store-card">
-                <h3>EMAIL</h3>
-                <p>Governed email via Microsoft Graph. Every send logged to LEDGER.</p>
-                <a href="https://canonic-apps.github.io/EMAIL/">Launch</a>
-            </div>
-            <div class="store-card">
+        <h2 class="section-title">CONTENT APPS</h2>
+        <div class="grid">
+            <a href="https://canonic-apps.github.io/PAPER/" class="card">
+                <h3>PAPER</h3>
+                <p>Versioned papers at epistemic boundaries. V0 → V1 → V2 → V3.</p>
+            </a>
+            <a href="https://canonic-apps.github.io/CV/" class="card">
                 <h3>CV</h3>
-                <p>Governed credentials. Evidence-backed claims, immutable versions.</p>
-                <a href="https://canonic-apps.github.io/CV/">Launch</a>
-            </div>
-            <div class="store-card">
-                <h3>CREDENTIALING</h3>
-                <p>Professional credential verification. NPI, licenses, certifications. Domain: MEDICINE</p>
-                <a href="https://canonic-domains.github.io/MEDICINE/">Launch</a>
-            </div>
-        </div>
-    </section>
-
-    <section class="section">
-        <h2 class="section-title">DOMAIN APPS — MEDICINE</h2>
-        <div class="store-grid">
-            <div class="store-card">
-                <h3>MAMMOCHAT</h3>
-                <p>Clinical breast imaging AI. 20,000+ patient encounters. Domain: MEDICINE.ONCOLOGY.BREAST</p>
-                <a href="https://canonic-apps.github.io/MAMMOCHAT/">Launch</a>
-            </div>
-            <div class="store-card">
-                <h3>PSYCHCHAT</h3>
-                <p>Psychiatry AI. FDA pathway. Domain: MEDICINE.PSYCHIATRY</p>
-                <a href="https://canonic-apps.github.io/PSYCHCHAT/">Launch</a>
-            </div>
-        </div>
-    </section>
-
-    <section class="section">
-        <h2 class="section-title">DOMAIN APPS — PERSONAL</h2>
-        <div class="store-grid">
-            <div class="store-card">
-                <h3>YOUCHAT</h3>
-                <p>Consumer wellness. Personal governance. Domain: YOU</p>
-                <a href="https://canonic-apps.github.io/YOUCHAT/">Launch</a>
-            </div>
-            <div class="store-card">
-                <h3>SELFCHAT</h3>
-                <p>Self-governance. Governance of the governor. The CHAT oath.</p>
-                <a href="https://canonic-apps.github.io/SELFCHAT/">Launch</a>
-            </div>
-        </div>
-    </section>
-
-    <section class="section">
-        <h2 class="section-title">DOMAIN APPS — PLATFORM</h2>
-        <div class="store-grid">
-            <div class="store-card">
-                <h3>TRANSCRIPTCHAT</h3>
-                <p>Query the LEDGER. Evidence retrieval. Domain: TRANSCRIPT</p>
-                <a href="https://canonic-apps.github.io/TRANSCRIPTCHAT/">Launch</a>
-            </div>
-            <div class="store-card">
-                <h3>TUTORCHAT</h3>
-                <p>Education funnel. Learn CANONIC governance. FREE tier.</p>
-                <a href="https://canonic-apps.github.io/TUTORCHAT/">Launch</a>
-            </div>
-            <div class="store-card">
-                <h3>INVESTORCHAT</h3>
-                <p>Token economics. COIN/TOKEN duality. Domain: FINANCE</p>
-                <a href="https://canonic-apps.github.io/INVESTORCHAT/">Launch</a>
-            </div>
-        </div>
-    </section>
-
-    <section class="section">
-        <h2 class="section-title">CONTENT</h2>
-        <div class="store-grid">
-            <div class="store-card">
-                <h3>ORIGIN</h3>
-                <p>How a book became a language. The accidental discovery of governance for the LLM era.</p>
-                <a href="BLOGS/ORIGIN/00-how-a-book-became-a-language.html">Read</a>
-            </div>
-            <div class="store-card">
-                <h3>20,000 CONVERSATIONS</h3>
-                <p>What patients taught us about governance. MammoChat's journey from Bloomberg Summit to clinical trials.</p>
-                <a href="BLOGS/ORIGIN/01-twenty-thousand-conversations.html">Read</a>
-            </div>
-            <div class="store-card">
-                <h3>THE MACHINE ERA</h3>
-                <p>Why AI governance matters now. The shift from human oversight to machine-enforced compliance.</p>
-                <a href="BLOGS/ORIGIN/02-the-machine-era-begins.html">Read</a>
-            </div>
-            <div class="store-card">
-                <h3>BUILDING IN PUBLIC</h3>
-                <p>Why CANONIC is open source. Governance infrastructure as a public good.</p>
-                <a href="BLOGS/ORIGIN/03-building-in-public.html">Read</a>
-            </div>
-            <div class="store-card">
-                <h3>PAPERS</h3>
-                <p>CANONIC v0: Constitutional AI Governance. Three axioms. 26 days. Closure.</p>
-                <a href="PAPERS/">View</a>
-            </div>
+                <p>Evidence-linked living document. Claims → proof.</p>
+            </a>
+            <a href="https://canonic-apps.github.io/EMAIL/" class="card">
+                <h3>EMAIL</h3>
+                <p>Governed email. Every send logged to LEDGER.</p>
+            </a>
         </div>
     </section>
 
     <section class="section">
         <h2 class="section-title">TIERS</h2>
-        <div class="store-grid">
-            <div class="store-card">
+        <div class="grid">
+            <a href="https://canonic-foundation.github.io/" class="card">
                 <h3>COMMUNITY</h3>
                 <p>Open source. Governed. Free for non-commercial use.</p>
-                <a href="https://github.com/canonic-foundation/canonic/tree/main/tiers/community">View</a>
-            </div>
-            <div class="store-card">
+            </a>
+            <a href="https://canonic-foundation.github.io/" class="card">
                 <h3>BUSINESS</h3>
                 <p>Professional domain licensing. Healthcare, finance, legal.</p>
-                <a href="https://github.com/canonic-foundation/canonic/tree/main/tiers/business">View</a>
-            </div>
-            <div class="store-card">
+            </a>
+            <a href="https://canonic-foundation.github.io/" class="card">
                 <h3>ENTERPRISE</h3>
                 <p>Full governance stack. Custom validators, SLA guarantees.</p>
-                <a href="https://github.com/canonic-foundation/canonic/tree/main/tiers/enterprise">View</a>
-            </div>
+            </a>
         </div>
     </section>
 
     <footer>
-        <p>CANONIC Store | Part of <a href="https://canonic-foundation.github.io">CANONIC Foundation</a> | January 2026</p>
+        <p><a href="https://canonic-foundation.github.io">Foundation</a> | <a href="https://github.com/canonic-apps">GitHub</a></p>
+        <p>Enter the Canonverse.</p>
     </footer>
+
+    <script src="https://canonic-foundation.github.io/assets/nav.js"></script>
 </body>
 </html>
