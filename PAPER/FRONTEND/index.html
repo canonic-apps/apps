@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PAPER | CANONIC</title>
+    <link rel="stylesheet" href="https://canonic-foundation.github.io/assets/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+    <nav class="topnav">
+        <a href="https://canonic-apps.github.io" class="topnav-brand">∩</a>
+        <div class="topnav-links">
+            <a href="https://canonic-foundation.github.io">Foundation</a>
+            <a href="https://canonic-apps.github.io">Apps</a>
+            <a href="./" class="active">Paper</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <h1>CANONIC</h1>
+        <p class="tagline">Constitutional AI Governance</p>
+        <div class="flow" id="version-nav">
+            <span class="flow-item active" data-version="V0">V0 MACHINE</span>
+            <span class="flow-arrow">→</span>
+            <span class="flow-item dim" data-version="V1">V1 FOUNDATION</span>
+            <span class="flow-arrow">→</span>
+            <span class="flow-item dim" data-version="V2">V2 APPS</span>
+            <span class="flow-arrow">→</span>
+            <span class="flow-item dim" data-version="V3">V3 DISTRIBUTED</span>
+        </div>
+    </section>
+
+    <article id="paper-content">
+        <div class="loading">Loading manuscript...</div>
+    </article>
+
+    <footer>
+        <p><a href="https://canonic-foundation.github.io">Foundation</a> | <a href="https://github.com/canonic-apps">GitHub</a></p>
+        <p>The paper proves itself by running.</p>
+    </footer>
+
+    <script src="https://canonic-foundation.github.io/assets/nav.js"></script>
+    <script>
+        const PAPER_BASE = 'https://raw.githubusercontent.com/canonic-apps/apps/main/STORE/PAPERS/CANONIC';
+
+        const versions = {
+            V0: { era: 'MACHINE', status: 'closed', date: '2026-01-23' },
+            V1: { era: 'FOUNDATION', status: 'in-progress', date: '2026' },
+            V2: { era: 'APPS', status: 'planned', date: 'TBD' },
+            V3: { era: 'DISTRIBUTED', status: 'planned', date: 'TBD' }
+        };
+
+        let currentVersion = 'V0';
+
+        async function loadPaper(version) {
+            const content = document.getElementById('paper-content');
+            const versionInfo = versions[version];
+
+            if (versionInfo.status === 'planned') {
+                content.innerHTML = `
+                    <div class="meta">${version} | ${versionInfo.era} Era | ${versionInfo.status}</div>
+                    <h2>Coming Soon</h2>
+                    <p>This version is planned for future development.</p>
+                `;
+                return;
+            }
+
+            content.innerHTML = '<div class="loading">Loading manuscript...</div>';
+
+            try {
+                const response = await fetch(`${PAPER_BASE}/${version}/manuscript.md`);
+                if (!response.ok) throw new Error('Not found');
+                const markdown = await response.text();
+                content.innerHTML = `
+                    <div class="meta">${version} | ${versionInfo.era} Era | ${versionInfo.date}</div>
+                    ${marked.parse(markdown)}
+                `;
+            } catch (e) {
+                content.innerHTML = `
+                    <div class="meta">${version} | ${versionInfo.era} Era</div>
+                    <h2>Manuscript not available</h2>
+                    <p>The manuscript for this version is not yet published.</p>
+                `;
+            }
+        }
+
+        document.querySelectorAll('#version-nav .flow-item').forEach(item => {
+            item.style.cursor = 'pointer';
+            item.addEventListener('click', () => {
+                const version = item.dataset.version;
+
+                document.querySelectorAll('#version-nav .flow-item').forEach(i => {
+                    i.classList.remove('active');
+                    i.classList.add('dim');
+                });
+                item.classList.add('active');
+                item.classList.remove('dim');
+
+                currentVersion = version;
+                loadPaper(version);
+            });
+        });
+
+        loadPaper('V0');
+    </script>
+</body>
+</html>

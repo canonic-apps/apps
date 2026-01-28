@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV | CANONIC</title>
+    <link rel="stylesheet" href="https://canonic-foundation.github.io/assets/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+    <nav class="topnav">
+        <a href="https://canonic-apps.github.io" class="topnav-brand">∩</a>
+        <div class="topnav-links">
+            <a href="https://canonic-foundation.github.io">Foundation</a>
+            <a href="https://canonic-apps.github.io">Apps</a>
+            <a href="./" class="active">CV</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <h1>CURRICULUM VITAE</h1>
+        <p class="tagline">Evidence-linked living document</p>
+        <span class="badge">CANONIC #0</span>
+    </section>
+
+    <article id="cv-content">
+        <div class="loading">Loading CV...</div>
+    </article>
+
+    <footer>
+        <p><a href="https://canonic-foundation.github.io">Foundation</a> | <a href="https://github.com/canonic-apps">GitHub</a></p>
+        <p>Every claim → evidence. Evidence → LEDGER. LEDGER → immutable.</p>
+    </footer>
+
+    <script src="https://canonic-foundation.github.io/assets/nav.js"></script>
+    <script>
+        const CV_URL = 'https://raw.githubusercontent.com/canonic-apps/apps/main/CV/dexter-cv.md';
+
+        async function loadCV() {
+            const content = document.getElementById('cv-content');
+
+            try {
+                const response = await fetch(CV_URL);
+                if (!response.ok) throw new Error('Not found');
+                const markdown = await response.text();
+
+                marked.setOptions({
+                    breaks: true,
+                    gfm: true
+                });
+
+                content.innerHTML = marked.parse(markdown);
+
+                // Make evidence links visually distinct
+                content.querySelectorAll('a').forEach(link => {
+                    if (link.href.includes('github.com') ||
+                        link.href.includes('ncbi.nlm.nih.gov') ||
+                        link.href.includes('scholar.google.com')) {
+                        link.classList.add('evidence-link');
+                    }
+                });
+            } catch (e) {
+                content.innerHTML = `
+                    <h2>CV not available</h2>
+                    <p>Unable to load the CV. Please check the repository.</p>
+                `;
+            }
+        }
+
+        loadCV();
+    </script>
+    <style>
+        .evidence-link {
+            border-bottom: 1px dashed var(--accent);
+        }
+        .evidence-link:hover {
+            border-bottom-style: solid;
+        }
+    </style>
+</body>
+</html>
