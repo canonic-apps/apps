@@ -16,5 +16,6 @@ inherits: /canonic-apps/
 | ORCID | Open Researcher and Contributor ID |
 | TEMPLATE | Institution-specific CV format |
 | EXPORT | Generated output in target format |
+| dexter-cv | CANONIC User #0 CV |
 
 ---

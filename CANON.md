@@ -49,3 +49,11 @@ series: *.md
 | READING | Consume | COIN | PLAY |
 
 ---
+
+## Series
+
+- [APPS.md](APPS.md) — Org spec
+- [CV/](CV/) — CV app
+- [STORE/](STORE/) — App store
+
+---

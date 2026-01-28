@@ -6,6 +6,8 @@ inherits: /CANONIC/
 
 ## Terms
 
-(Inherited from /CANONIC/)
+| Term | Definition |
+|------|------------|
+| APPS | Org spec. System + Domain applications. |
 
 ---

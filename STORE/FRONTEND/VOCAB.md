@@ -6,7 +6,9 @@ inherits: /CANONIC/
 
 ## Terms
 
-(Inherited from /CANONIC/)
+| Term | Definition |
+|------|------------|
+| BACKEND | Backend closure spec |
 
 ---
 

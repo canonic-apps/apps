@@ -29,3 +29,9 @@ series: *-cv.md
 - Level: BUSINESS (ENTERPRISE for non-profit/academic).
 
 ---
+
+## Series
+
+- [dexter-cv.md](dexter-cv.md) — CANONIC User #0
+
+---
