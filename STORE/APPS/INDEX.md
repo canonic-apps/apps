@@ -8,6 +8,7 @@ inherits: CANON.md
 
 | App | Owner | Domain | DETROS | Status |
 |-----|-------|--------|--------|--------|
+| [BYOL](BYOL.md) | canonic-foundation | governance | P (#64) | active |
 | [CV](https://github.com/hadleylab-dexter/hadleylab/tree/main/STORE/APPS/CV) | hadleylab-dexter | — | D∩S | registered |
 | [MAMMOCHAT](https://github.com/hadleylab-dexter/hadleylab/tree/main/STORE/APPS/MAMMOCHAT) | hadleylab-dexter | medicine | #63 | registered |
 | [CREDENTIALING](https://github.com/hadleylab-dexter/hadleylab/tree/main/STORE/APPS/CREDENTIALING) | hadleylab-dexter | — | D∩S | registered |
@@ -16,6 +17,9 @@ inherits: CANON.md
 ---
 
 ## By Domain
+
+### Governance
+- BYOL — Bring Your Own Language (P #64)
 
 ### General
 - CV — Governed credentials
