@@ -48,14 +48,14 @@ BYOL lets you define code governance for ANY programming language using declarat
 
 ## Supported Languages
 
-Out of the box:
-- Python (PYTHON.md)
+BYOL = Bring Your Own. You define:
+- Python
+- Go
+- TypeScript
+- Rust
+- Any language
 
-Add your own:
-- Go (GO.md)
-- TypeScript (TYPESCRIPT.md)
-- Rust (RUST.md)
-- Any language you define
+Create `{LANG}.md` in your repo. MACHINE enforces.
 
 ---
 
@@ -88,8 +88,8 @@ python3 canonic_validate.py --tier 64
 
 ## Links
 
-- [LANGUAGE/MACHINE/PYTHON.md](/LANGUAGE/MACHINE/PYTHON.md) — Python spec
-- [VaaS](/VALIDATORS/) — Validation as a Service
-- [LanguageReader](/MACHINE/core.py) — Abstraction layer
+- [MACHINE/CANON.md](/CANONIC/LANGUAGE/MACHINE/) — Pure enforcement runtime
+- [VaaS](https://canonic-apps.github.io) — Validation as a Service
+- [CANONIC](https://canonic-foundation.github.io) — The LANGUAGE of compliance
 
 ---
