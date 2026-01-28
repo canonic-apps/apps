@@ -1,6 +1,7 @@
 # APPS — CANON
 
-inherits: ../CANON.md
+inherits: /CANONIC/APPS/STORE/
+series: *.md
 
 ---
 

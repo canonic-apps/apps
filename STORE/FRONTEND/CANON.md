@@ -1,6 +1,7 @@
 # FRONTEND — CANON
 
 inherits: /CANONIC/LANGUAGE/TEMPLATES/FRONTEND/
+series: *.md
 
 ---
 
