@@ -234,11 +234,11 @@ Certain directory names may cause issues with GitHub Pages CDN caching. Avoid:
 
 | Name | Issue | Alternative |
 |------|-------|-------------|
-| `STORE` | Nested paths may 404 despite files existing | `CATALOG` |
-| `store` | Same as STORE (case-insensitive) | `catalog` |
-| `REGISTRY` | Windows Registry connotation, avoid | `CATALOG` |
+| `STORE` | Nested paths may 404 despite files existing | `SHOP` |
+| `store` | Same as STORE (case-insensitive) | `shop` |
+| `REGISTRY` | Windows Registry connotation, avoid | `SHOP` |
 
-**Discovery:** In January 2026, the `/STORE/BOOKS/` path on canonic-apps.github.io returned 404 despite files existing in git. Renaming to `/CATALOG/BOOKS/` resolved the issue.
+**Discovery:** In January 2026, the `/STORE/BOOKS/` path on canonic-apps.github.io returned 404 despite files existing in git. Renaming to `/SHOP/BOOKS/` resolved the issue.
 
 ---
 

@@ -14,17 +14,17 @@
                 {"title": "PAPER", "description": "CANONIC manuscript viewer.", "url": "/PAPER/", "active": true},
                 {"title": "DOMAIN", "description": "Vertical expertise apps.", "url": "/DOMAIN/"},
                 {"title": "MED-CHAT", "description": "Clinical breast imaging AI.", "url": "/MED-CHAT/", "dim": true},
-                {"title": "CATALOG", "description": "Governed distribution.", "url": "/CATALOG/"}
+                {"title": "SHOP", "description": "Governed distribution.", "url": "/SHOP/"}
             ]
         },
         {
-            "title": "CATALOG",
+            "title": "SHOP",
             "subtitle": "Governed distribution.",
             "type": "grid",
             "items": [
-                {"title": "APPS", "description": "Software applications. VaaS validated.", "url": "/CATALOG/APPS/"},
-                {"title": "BOOKS", "description": "Publications. Constitutional writing.", "url": "/CATALOG/BOOKS/"},
-                {"title": "PAPERS", "description": "Research. Evidence chain.", "url": "/CATALOG/PAPERS/"}
+                {"title": "APPS", "description": "Software applications. VaaS validated.", "url": "/SHOP/APPS/"},
+                {"title": "BOOKS", "description": "Publications. Constitutional writing.", "url": "/SHOP/BOOKS/"},
+                {"title": "PAPERS", "description": "Research. Evidence chain.", "url": "/SHOP/PAPERS/"}
             ]
         },
         {
