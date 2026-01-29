@@ -1,0 +1,107 @@
+#!/bin/bash
+# CANONIC Onboard — Add user to app and send welcome email
+#
+# Usage: canonic onboard <email> <github_username> --app <APP>
+#
+# GitHub = LEDGER + GATE + INFRASTRUCTURE
+
+set -e
+
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+
+# Parse arguments
+EMAIL=""
+GITHUB_USER=""
+APP="MAMMOCHAT"
+INVITER="${USER:-admin}"
+
+while [[ $# -gt 0 ]]; do
+    case $1 in
+        --app)
+            APP="$2"
+            shift 2
+            ;;
+        --inviter)
+            INVITER="$2"
+            shift 2
+            ;;
+        *)
+            if [ -z "$EMAIL" ]; then
+                EMAIL="$1"
+            elif [ -z "$GITHUB_USER" ]; then
+                GITHUB_USER="$1"
+            fi
+            shift
+            ;;
+    esac
+done
+
+if [ -z "$EMAIL" ] || [ -z "$GITHUB_USER" ]; then
+    echo "Usage: onboard <email> <github_username> [--app APP] [--inviter NAME]"
+    echo ""
+    echo "Examples:"
+    echo "  onboard user@hospital.org drsmith --app MAMMOCHAT"
+    echo "  onboard user@clinic.com jdoe --app MAMMOCHAT --inviter 'Dr. Hadley'"
+    exit 1
+fi
+
+# Map app to repo
+case $APP in
+    MAMMOCHAT|MED-CHAT)
+        REPO="canonic-apps/MAMMOCHAT"
+        TEMPLATE="mammochat-onboard.md"
+        ;;
+    *)
+        echo "Unknown app: $APP"
+        exit 1
+        ;;
+esac
+
+echo "=== CANONIC ONBOARD ==="
+echo "Email: $EMAIL"
+echo "GitHub: $GITHUB_USER"
+echo "App: $APP"
+echo "Repo: $REPO"
+echo "Inviter: $INVITER"
+echo ""
+
+# Step 1: Add collaborator to repo
+echo "[1/2] Adding $GITHUB_USER as collaborator to $REPO..."
+gh api \
+    --method PUT \
+    -H "Accept: application/vnd.github+json" \
+    "/repos/$REPO/collaborators/$GITHUB_USER" \
+    -f permission='pull' \
+    && echo "      Invitation sent via GitHub" \
+    || echo "      Failed to add collaborator (may already exist)"
+
+# Step 2: Send onboarding email
+echo "[2/2] Sending onboarding email to $EMAIL..."
+
+# Read template and substitute variables
+TEMPLATE_PATH="$SCRIPT_DIR/templates/$TEMPLATE"
+if [ -f "$TEMPLATE_PATH" ]; then
+    BODY=$(cat "$TEMPLATE_PATH" | \
+        sed "s/{inviter}/$INVITER/g" | \
+        sed "s/{github_username}/$GITHUB_USER/g" | \
+        sed "s/{email}/$EMAIL/g")
+
+    # Send via EMAIL-AGENT
+    "$SCRIPT_DIR/email" send \
+        --to "$EMAIL" \
+        --subject "MAMMOCHAT Access — Welcome to CANONIC" \
+        --body "$BODY" \
+        && echo "      Email sent" \
+        || echo "      Email send failed"
+else
+    echo "      Template not found: $TEMPLATE_PATH"
+    echo "      Skipping email (GitHub invitation still sent)"
+fi
+
+echo ""
+echo "=== ONBOARD COMPLETE ==="
+echo ""
+echo "Next steps for $GITHUB_USER:"
+echo "1. Accept GitHub invitation: https://github.com/$REPO/invitations"
+echo "2. Generate PAT with 'repo' scope: https://github.com/settings/tokens"
+echo "3. Access app: https://canonic-apps.github.io/MED-CHAT/"
