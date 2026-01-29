@@ -20,3 +20,11 @@ status: active
 - MAMMOCHAT/ — Medical AI papers
 
 ---
+
+## Series
+
+```
+*/manuscript.md
+```
+
+---

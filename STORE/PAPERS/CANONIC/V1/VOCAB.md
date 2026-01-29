@@ -22,6 +22,14 @@ The property that all terms used in CANON and VOCAB are defined within the scope
 
 Enforcement of governance rules by automated validators. No human judgment required for validity determination.
 
+### manuscript
+
+Paper source document in markdown format.
+
+### TYPESET
+
+Typesetting instructions and configuration for paper output.
+
 ---
 
 ## Inherited

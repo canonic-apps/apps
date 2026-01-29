@@ -1,27 +1,13 @@
-# VOCAB (/canonic/machine/os/writing/episodes/)
+# EPISODES — VOCAB
 
-inherits: /writing/
-
----
-
-## Content Concepts
-
-### immutability
-
-The property that recorded episodes cannot be modified.
+inherits: ../VOCAB.md
 
 ---
 
-### disclosure
-
-The requirement to identify participating humans and model identities.
-
----
-
-### interpretation
-
-The process of deriving meaning from artifacts.
+| Term | Definition |
+|------|------------|
+| immutability | Property that recorded episodes cannot be modified |
+| disclosure | Requirement to identify participating humans and models |
+| interpretation | Process of deriving meaning from artifacts |
 
 ---
-
-End of VOCAB.
