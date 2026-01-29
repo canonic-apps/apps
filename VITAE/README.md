@@ -1,15 +1,15 @@
-# CV
+# VITAE
 
-Governed academic CV generator.
+Evidence-linked living document. Governed curriculum vitae.
 
-inherits: /canonic-apps/CV/
+inherits: /canonic-apps/VITAE/
 
 ---
 
 ## Structure
 
 ```
-cv.md
+VITAE.md
 ├── Identity          <- Name, credentials, links
 ├── Education         <- Degrees (Evidence: transcripts)
 ├── Positions         <- Jobs (Evidence: offer letters)
@@ -26,11 +26,26 @@ cv.md
 
 ---
 
+## Formula
+
+```
+VITAE = CLAIMS + EVIDENCE + LEDGER
+AGENT = CHAT + EVO
+```
+
+---
+
 ## Artifacts
 
 ```
-{name}-cv.md  → source (governed, living)
-{name}-cv.pdf → output (styled, exportable)
+VITAE.md  → source (governed, living)
+VITAE.pdf → output (styled, exportable)
 ```
+
+---
+
+## Example
+
+- [DEXTER VITAE](https://hadleylab-dexter.github.io/hadleylab/VITAE/) — CANONIC #0
 
 ---
