@@ -1,73 +1,50 @@
 # EMAIL
 
-Governed email app for CANONIC. Microsoft Graph native.
+Governed email for CANONIC via iCloud+ Custom Email Domain.
 
 ## Status
 
-**Building** — Azure AD app registration required
+**ACTIVE** — Passkey authentication via iCloud Keychain
 
 ## Setup
 
-### 1. Azure AD App Registration
+### 1. iCloud+ Custom Email Domain
 
-```bash
-# Go to Azure Portal
-open "https://portal.azure.com/#blade/Microsoft_AAD_RegisteredApps/ApplicationsListBlade"
-```
+Domain `canonic.org` configured with iCloud+ Custom Email Domain:
+- MX records → icloud.com
+- SPF, DKIM via Cloudflare DNS
 
-Register new app:
-- Name: `CANONIC-EMAIL`
-- Supported account types: Single tenant (or multi if needed)
-- Redirect URI: `http://localhost:3000/callback` (for dev)
+### 2. Access
 
-### 2. API Permissions
+- **Web:** https://www.icloud.com/mail/
+- **iOS/macOS:** Native Mail.app with iCloud account
+- **Settings:** https://www.icloud.com/icloudplus/
 
-Add these Graph permissions:
-- `Mail.Send` (Delegated or Application)
-- `Mail.ReadWrite` (if storing drafts)
-- `User.Read` (for user info)
+### 3. Authentication
 
-### 3. Configure Credentials
+Passkey via iCloud Keychain — no passwords stored.
 
-After registration, save to `.env`:
-```
-AZURE_CLIENT_ID=your-client-id
-AZURE_CLIENT_SECRET=your-client-secret
-AZURE_TENANT_ID=your-tenant-id
-```
+## Email Addresses
 
-### 4. Install Dependencies
-
-```bash
-pip install msal requests
-```
-
-## Usage
-
-```bash
-# Send email
-./email.py send --to "avinash@atomadvantage.ai" --template "atom-proposal"
-
-# List templates
-./email.py templates
-
-# View sent log
-./email.py log
-```
-
-## Templates
-
-Stored in `templates/`:
-- `atom-proposal.md` — ATOM partnership options
-- (add more as needed)
+| User | Email |
+|------|-------|
+| Dexter | dexter@canonic.org |
+| Fatima | fatima@canonic.org |
 
 ## Governance
 
-All emails logged to `sent/` with:
-- Timestamp
-- Recipient
-- Subject
-- Template used
-- Message ID from Graph API
+All emails logged via:
+- iCloud sent folder
+- Native Mail.app audit trail
+- Manual LEDGER entries for formal communications
+
+## Credentials
+
+See `~/.canonic/CREDENTIALS/ICLOUD/email-domain.md`
+
+## Migration Note
+
+Microsoft Graph implementation deprecated (2026-01-29).
+Previous code preserved in `canonic_email.py` for reference.
 
 ---

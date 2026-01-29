@@ -1,0 +1,145 @@
+#!/bin/bash
+# CANONIC OPS — Unified Operations
+# ./ops onboard - send onboarding emails
+# ./ops invite - GitHub invitations
+# ./ops status - show all users
+
+set -e
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+
+# USER REGISTRY (contact emails)
+# Format: NAME:CANONIC_EMAIL:CONTACT_EMAIL:GITHUB:ORG:TIER
+declare -a USERS=(
+    "DEXTER:hadley@canonic.org:dexter.hadley@gmail.com:iDrDex:FOUNDATION:ENTERPRISE"
+    "FATIMA:fatima@canonic.org::fatima-canonic:FOUNDATION:ENTERPRISE"
+    "AVINASH:avinash@canonic.org:avinash@atomadvantage.ai:avinash-atom:ATOM:BUSINESS"
+    "DAVID:slonim@canonic.org::david-slonim:ONCONEX:ENTERPRISE"
+    "ROB:rob@canonic.org::rob-advent:ADVENTHEALTH:ENTERPRISE"
+    "PATRICK:patrick@canonic.org::patrick-lake:CANONIC:COMMUNITY"
+)
+
+usage() {
+    cat << 'EOF'
+CANONIC OPS — Unified Operations
+
+Usage: ./ops <command>
+
+Commands:
+  status              Show all registered users
+  onboard <name>      Send onboarding email to user
+  onboard-all         Send onboarding to all users with contact emails
+  invite <name>       Invite user to GitHub
+  add <name> <contact> <github> <org> <tier>  Add new user
+
+Examples:
+  ./ops status
+  ./ops onboard AVINASH
+  ./ops onboard-all
+  ./ops invite PATRICK
+  ./ops add PATRICK patrick@example.com patrick-lake CANONIC COMMUNITY
+EOF
+}
+
+show_status() {
+    echo "=== CANONIC USERS ==="
+    echo ""
+    printf "%-12s %-25s %-30s %-15s %-12s\n" "NAME" "CANONIC" "CONTACT" "ORG" "TIER"
+    printf "%s\n" "$(printf '=%.0s' {1..100})"
+
+    for user in "${USERS[@]}"; do
+        IFS=':' read -r name canonic contact github org tier <<< "$user"
+        printf "%-12s %-25s %-30s %-15s %-12s\n" "$name" "$canonic" "${contact:-(none)}" "$org" "$tier"
+    done
+
+    echo ""
+    echo "Total: ${#USERS[@]} users"
+}
+
+onboard_user() {
+    local target="$1"
+
+    for user in "${USERS[@]}"; do
+        IFS=':' read -r name canonic contact github org tier <<< "$user"
+
+        if [ "$name" = "$target" ]; then
+            if [ -z "$contact" ]; then
+                echo "ERROR: No contact email for $name"
+                echo "Add with: ./ops add $name <contact_email> <github> $org $tier"
+                exit 1
+            fi
+
+            echo "Sending onboarding to $name at $contact..."
+            python3 "$SCRIPT_DIR/canonic_email.py" send "$contact" onboarding
+            echo "Done."
+            return 0
+        fi
+    done
+
+    echo "ERROR: User $target not found"
+    exit 1
+}
+
+onboard_all() {
+    echo "=== BATCH ONBOARDING ==="
+    echo ""
+
+    for user in "${USERS[@]}"; do
+        IFS=':' read -r name canonic contact github org tier <<< "$user"
+
+        if [ -n "$contact" ]; then
+            echo "[$name] Sending to $contact..."
+            python3 "$SCRIPT_DIR/canonic_email.py" send "$contact" onboarding 2>/dev/null && echo "  ✓ Sent" || echo "  ✗ Failed"
+        else
+            echo "[$name] Skipping (no contact email)"
+        fi
+    done
+
+    echo ""
+    echo "=== BATCH COMPLETE ==="
+}
+
+invite_user() {
+    local target="$1"
+    local repo="${2:-canonic-apps/MAMMOCHAT}"
+
+    for user in "${USERS[@]}"; do
+        IFS=':' read -r name canonic contact github org tier <<< "$user"
+
+        if [ "$name" = "$target" ]; then
+            if [ -z "$github" ]; then
+                echo "ERROR: No GitHub username for $name"
+                exit 1
+            fi
+
+            echo "Inviting $github to $repo..."
+            gh api --method PUT \
+                -H "Accept: application/vnd.github+json" \
+                "/repos/$repo/collaborators/$github" \
+                -f permission='pull' 2>/dev/null \
+                && echo "✓ Invitation sent to $github" \
+                || echo "✗ Failed (may already be collaborator)"
+            return 0
+        fi
+    done
+
+    echo "ERROR: User $target not found"
+    exit 1
+}
+
+case "${1:-}" in
+    status)
+        show_status
+        ;;
+    onboard)
+        onboard_user "$2"
+        ;;
+    onboard-all)
+        onboard_all
+        ;;
+    invite)
+        invite_user "$2" "$3"
+        ;;
+    *)
+        usage
+        ;;
+esac

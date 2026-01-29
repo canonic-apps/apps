@@ -1,11 +1,17 @@
 #!/usr/bin/env python3
 """
-CANONIC EMAIL — CANON compliant
+CANONIC EMAIL — DEPRECATED
 
 inherits: /CANONIC/APPS/EMAIL-AGENT/CANON.md
 tier: 63
 
-Governed email via Microsoft Graph.
+DEPRECATED: Microsoft Graph implementation replaced by iCloud+ Custom Email Domain.
+- Email: dexter@canonic.org, fatima@canonic.org
+- Auth: Passkey via iCloud Keychain
+- Send: Native Mail.app or icloud.com/mail
+- DNS: Cloudflare (MX → icloud.com)
+
+This file preserved for reference. See ~/.canonic/CREDENTIALS/ICLOUD/
 """
 
 from __future__ import annotations

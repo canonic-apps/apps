@@ -6,17 +6,17 @@ inherits: /CANONIC/
 
 ## Axiom
 
-**EMAIL = O∩E∩T grounded. Governed communications via Microsoft Graph.**
+**EMAIL = O∩E∩T grounded. Governed communications via iCloud+ Custom Email Domain.**
 
 ---
 
 ## Axioms
 
-- All email operations MUST use Microsoft Graph API.
+- All email operations via iCloud+ native apps (Mail.app, icloud.com).
 - Every sent email MUST be logged to LEDGER with timestamp.
 - Email templates MUST be stored in templates/ and versioned.
-- Direct API calls only. No third-party email services.
-- OAuth tokens MUST be stored securely, never in plaintext.
+- Authentication via Passkey (iCloud Keychain).
+- DNS managed via Cloudflare (MX, SPF, DKIM).
 - App MUST be Git-native. Validators are GitHub Actions.
 - Validators MUST be black-box. Opaque, signed, tamper-proof.
 
@@ -24,11 +24,11 @@ inherits: /CANONIC/
 
 ## Constraints
 
-- Provider: Microsoft 365 / Azure AD.
-- API: Microsoft Graph.
-- Scopes: Mail.Send, Mail.ReadWrite, User.Read.
-- CLI-first interface.
-- Zero configuration (auto-detect from git config).
+- Provider: iCloud+ Custom Email Domain.
+- Auth: Passkey via iCloud Keychain.
+- DNS: Cloudflare (MX → icloud.com, SPF, DKIM).
+- Domain: canonic.org.
+- Native-first interface (Mail.app, web).
 
 ---
 

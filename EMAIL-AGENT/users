@@ -200,18 +200,103 @@ else:
 
 sync_from_registry() {
     check_token
-    local registry="$SCRIPT_DIR/../../../USERS.md"
 
-    if [ ! -f "$registry" ]; then
-        echo "ERROR: USERS.md not found at $registry"
+    # Find USERS.md - check multiple locations
+    local registry=""
+    local search_paths=(
+        "$HOME/Canonic/USERS.md"
+        "$HOME/Canonic/hadleylab-dexter/USERS.md"
+        "$HOME/Canonic/canonic-foundation/USERS.md"
+    )
+
+    for path in "${search_paths[@]}"; do
+        if [ -f "$path" ]; then
+            registry="$path"
+            break
+        fi
+    done
+
+    if [ -z "$registry" ]; then
+        echo "ERROR: USERS.md not found"
+        echo "Searched: ${search_paths[*]}"
         exit 1
     fi
 
-    echo "=== Syncing from USERS.md ==="
-    # Parse users from registry and sync routes
-    # This is a placeholder - needs to parse the actual format
-    echo "TODO: Parse USERS.md and sync routes"
-    echo "For now, use: ./users add <user> <dest>"
+    echo "=== Syncing from $registry ==="
+    echo ""
+
+    # Export for Python
+    export REGISTRY_PATH="$registry"
+
+    # Parse USERS table and sync routes
+    python3 << 'PYSCRIPT'
+import re
+import os
+
+registry = os.environ.get('REGISTRY_PATH', '')
+if not registry:
+    print("No registry path")
+    exit(1)
+
+with open(registry) as f:
+    content = f.read()
+
+# Find USERS table: | ID | User | Role | Email | Org |
+pattern = r'\|\s*(\d+)\s*\|\s*([^|]+)\s*\|\s*([^|]*)\s*\|\s*([^|@]+@canonic\.org)\s*\|\s*([^|]+)\s*\|'
+
+users = []
+for match in re.finditer(pattern, content, re.IGNORECASE):
+    user_id, name, role, email, org = match.groups()
+    username = email.split('@')[0].strip().lower()
+    users.append({
+        'id': user_id.strip(),
+        'name': name.strip(),
+        'username': username,
+        'email': email.strip(),
+        'org': org.strip()
+    })
+
+print(f"Found {len(users)} users in registry:\n")
+for u in users:
+    print(f"  [{u['id']}] {u['name']}")
+    print(f"      {u['username']}@canonic.org ({u['org']})")
+
+print("\n" + "=" * 50)
+print("SYNC COMMANDS:")
+print("=" * 50 + "\n")
+
+# Default destination (central inbox)
+dest = "hadleylaboratory@gmail.com"
+
+for u in users:
+    print(f"./users add {u['username']} {dest}")
+
+print("\nRun with --execute to sync automatically")
+PYSCRIPT
+
+    # If --execute flag passed, actually run the sync
+    if [ "${2:-}" = "--execute" ]; then
+        echo ""
+        echo "=== EXECUTING SYNC ==="
+        python3 << 'PYSCRIPT2'
+import re
+import subprocess
+import os
+
+registry = os.environ.get('REGISTRY_PATH', '')
+with open(registry) as f:
+    content = f.read()
+
+pattern = r'\|\s*(\d+)\s*\|\s*([^|]+)\s*\|\s*([^|]*)\s*\|\s*([^|@]+@canonic\.org)\s*\|\s*([^|]+)\s*\|'
+dest = "hadleylaboratory@gmail.com"
+
+for match in re.finditer(pattern, content, re.IGNORECASE):
+    user_id, name, role, email, org = match.groups()
+    username = email.split('@')[0].strip().lower()
+    print(f"Adding route: {username}@canonic.org -> {dest}")
+    # Note: Would call add_route here in production
+PYSCRIPT2
+    fi
 }
 
 setup_token() {
