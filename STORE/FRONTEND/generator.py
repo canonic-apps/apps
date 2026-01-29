@@ -85,9 +85,8 @@ def generate_page(config: dict, tokens: dict) -> str:
 </head>
 <body>
     <section class="hero">
-        <img src="{LOGO_URL}" alt="CANONIC" style="height: {LOGO_HEIGHT}; margin-bottom: 1rem; filter: {LOGO_FILTER};">
-        <h1>{heading}</h1>
         <p class="tagline">{tagline}</p>
+        <img src="{LOGO_URL}" alt="CANONIC" style="height: {LOGO_HEIGHT}; margin-bottom: 1rem; filter: {LOGO_FILTER};">
         <span class="badge">{badge}</span>
     </section>
 {sections_html}
