@@ -1,0 +1,10 @@
+name = "canonic-oauth"
+main = "oauth-callback.js"
+compatibility_date = "2024-01-01"
+
+# Set these in Cloudflare dashboard or via wrangler secret
+# wrangler secret put GITHUB_CLIENT_ID
+# wrangler secret put GITHUB_CLIENT_SECRET
+
+[vars]
+# Non-secret config can go here
