@@ -1,14 +1,14 @@
 # CANONIC APPS — CANON
 
 inherits: /CANONIC/
-tier: 63
+tier: ENTERPRISE
 series: *.md
 
 ---
 
 ## Axiom
 
-**APPS = D∩O∩S grounded. SYSTEM + DOMAIN.**
+**APPS = D∩O∩S grounded. SYSTEM + DOMAIN. EVO = grounded evolution.**
 
 ---
 
@@ -16,6 +16,7 @@ series: *.md
 
 - SYSTEM/ — Universal infrastructure. Every user inherits.
 - DOMAIN/ — Vertical expertise. Users opt into.
+- EVO — Grounded evolution. All change is ledger-derived.
 
 ---
 
@@ -37,7 +38,7 @@ series: *.md
 | CLOSURE | 33 | Minimal | Base. |
 | COMMUNITY | 35 | Free | COIN. Scale. |
 | BUSINESS | 39 | Subscription | 5%. TOKEN. |
-| ENTERPRISE | 63 | Contract | 10%. TOKEN + VaaS. |
+| ENTERPRISE | 63 | Contract | 10%. TOKEN + VaaS (VITAE as a Service). |
 
 ---
 
@@ -54,6 +55,6 @@ series: *.md
 
 - [APPS.md](APPS.md) — Org spec
 - [CV/](CV/) — CV app
-- [STORE/](STORE/) — App store
+- [SHOP/](SHOP/) — App distribution (SHOP, not STORE/CATALOG)
 
 ---

@@ -1,6 +1,9 @@
 # CANONIC APPS
 
-Governed utilities for the CANONIC ecosystem.
+![CANONIC](https://img.shields.io/badge/CANONIC-ENTERPRISE-00ff88?style=flat-square)
+![Validators](https://img.shields.io/badge/VaaS-ENTERPRISE-00ff88?style=flat-square)
+
+Governed utilities for the CANONIC ecosystem. ENTERPRISE compliance via VaaS (VITAE as a Service).
 
 ## Structure
 
@@ -15,8 +18,8 @@ canonic-apps/
 │   ├── HEXAD/        ← Six-element patterns
 │   ├── LATTICE/      ← Formula composition
 │   └── TRANSCRIPT/   ← Evidence queries
-├── STORE/            ← App distribution
-├── EVOLUTION/        ← System evolution
+├── SHOP/             ← App distribution (SHOP, not STORE/CATALOG)
+├── EVOLUTION/        ← EVO = grounded evolution
 ├── MAMMOCHAT/        ← Oncology support
 ├── PSYCHCHAT/        ← Mental health
 ├── SELFCHAT/         ← AI introspection
@@ -44,5 +47,6 @@ canonic knowledge search --query "governance"
 3. Composable — apps call apps
 4. One Namespace — `canonic {domain} {app} {cmd}`
 5. Audit Everything — git log is truth
+6. EVO — grounded evolution. All change is ledger-derived.
 
 ---
