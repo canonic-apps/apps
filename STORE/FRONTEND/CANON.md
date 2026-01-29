@@ -154,5 +154,6 @@ Standard navigation across all frontends:
 ## Series
 
 - [BACKEND.md](BACKEND.md) — Backend closure spec
+- [GITHUB.md](GITHUB.md) — GitHub Pages deployment
 
 ---

@@ -1,23 +1,45 @@
 #!/usr/bin/env python3
 """
-FRONTEND Generator — CANON compliant
+FRONTEND Generator — FaaS
 
-inherits: /CANONIC/APPS/STORE/FRONTEND/CANON.md
+inherits: /CANONIC/TEMPLATES/FRONTEND/
 
 Generates {org}.github.io from config.
+Reads tokens from TEMPLATES/FRONTEND/tokens.json
+Validates no hardcoding.
 """
 
 import json
 import os
 from pathlib import Path
 
-# Design tokens from CANON
-LOGO_URL = "https://raw.githubusercontent.com/canonic-foundation/canonic/main/LANGUAGE/TIERS/assets/logo-business.svg"
-STYLE_URL = "https://canonic-foundation.github.io/assets/style.css"
-NAV_URL = "https://canonic-foundation.github.io/assets/nav.js"
+# Token source paths
+TOKENS_PATH = os.path.expanduser("~/Canonic/canonic-foundation/TEMPLATES/FRONTEND/tokens.json")
+TOKENS_FALLBACK = os.path.expanduser("~/.canonic/tokens.json")
 
-def generate_page(config: dict) -> str:
-    """Generate index.html from config."""
+def load_tokens(tokens_path: str = None) -> dict:
+    """Load tokens from TEMPLATES."""
+    paths = [tokens_path, TOKENS_PATH, TOKENS_FALLBACK] if tokens_path else [TOKENS_PATH, TOKENS_FALLBACK]
+
+    for path in paths:
+        if path and os.path.exists(path):
+            with open(path, 'r') as f:
+                return json.load(f)
+
+    raise FileNotFoundError(f"No tokens.json found. Expected at {TOKENS_PATH}")
+
+def generate_page(config: dict, tokens: dict) -> str:
+    """Generate index.html from config + tokens."""
+
+    # Extract tokens
+    logo = tokens.get('logo', {})
+    assets = tokens.get('assets', {})
+
+    LOGO_URL = logo.get('url', '')
+    LOGO_HEIGHT = logo.get('height', '240px')
+    LOGO_FILTER = logo.get('filter', 'invert(1)')
+    STYLE_URL = assets.get('style', '')
+    NAV_URL = assets.get('nav', '')
 
     title = config.get('title', 'CANONIC')
     heading = config.get('heading', 'CANONIC')
@@ -31,7 +53,7 @@ def generate_page(config: dict) -> str:
     for section in sections:
         section_title = section.get('title', '')
         section_subtitle = section.get('subtitle', '')
-        section_type = section.get('type', 'grid')  # grid, timeline, flow
+        section_type = section.get('type', 'grid')
         items = section.get('items', [])
 
         if section_type == 'timeline':
@@ -51,7 +73,6 @@ def generate_page(config: dict) -> str:
     </section>
 '''
 
-    # Build footer HTML
     footer_html = ' | '.join([f'<a href="{link["url"]}">{link["text"]}</a>' for link in footer_links])
 
     return f'''<!DOCTYPE html>
@@ -64,7 +85,7 @@ def generate_page(config: dict) -> str:
 </head>
 <body>
     <section class="hero">
-        <img src="{LOGO_URL}" alt="CANONIC" style="height: 240px; margin-bottom: 1rem; filter: invert(1);">
+        <img src="{LOGO_URL}" alt="CANONIC" style="height: {LOGO_HEIGHT}; margin-bottom: 1rem; filter: {LOGO_FILTER};">
         <h1>{heading}</h1>
         <p class="tagline">{tagline}</p>
         <span class="badge">{badge}</span>
@@ -153,30 +174,31 @@ def generate_flow(items: list) -> str:
             {' '.join(flow_items)}
         </div>'''
 
-def build_frontend(config_path: str, output_dir: str):
-    """Build frontend from config file."""
+def build_frontend(config_path: str, output_dir: str, tokens_path: str = None):
+    """Build frontend from config + tokens."""
+
+    # Load tokens from TEMPLATES
+    tokens = load_tokens(tokens_path)
+
     with open(config_path, 'r') as f:
         config = json.load(f)
 
-    # Generate main page
-    html = generate_page(config)
+    html = generate_page(config, tokens)
 
-    # Ensure output directory exists
     Path(output_dir).mkdir(parents=True, exist_ok=True)
 
-    # Write index.html
     output_path = os.path.join(output_dir, 'index.html')
     with open(output_path, 'w') as f:
         f.write(html)
 
     print(f"Generated: {output_path}")
 
-    # Generate subpages if any
+    # Generate subpages
     subpages = config.get('subpages', {})
     for path, subconfig in subpages.items():
         subdir = os.path.join(output_dir, path)
         Path(subdir).mkdir(parents=True, exist_ok=True)
-        subhtml = generate_page(subconfig)
+        subhtml = generate_page(subconfig, tokens)
         subpath = os.path.join(subdir, 'index.html')
         with open(subpath, 'w') as f:
             f.write(subhtml)
@@ -185,7 +207,8 @@ def build_frontend(config_path: str, output_dir: str):
 if __name__ == '__main__':
     import sys
     if len(sys.argv) < 3:
-        print("Usage: python generator.py <config.json> <output_dir>")
+        print("Usage: python generator.py <config.json> <output_dir> [tokens.json]")
         sys.exit(1)
 
-    build_frontend(sys.argv[1], sys.argv[2])
+    tokens_path = sys.argv[3] if len(sys.argv) > 3 else None
+    build_frontend(sys.argv[1], sys.argv[2], tokens_path)

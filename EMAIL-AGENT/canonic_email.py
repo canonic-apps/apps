@@ -89,20 +89,30 @@ def whoami(token: str) -> dict[str, Any]:
     return r.json()
 
 
-def send(token: str, to: str, subject: str, body: str, html: bool = False) -> bool:
-    """Send email via Microsoft Graph API."""
+def send(token: str, to: str, subject: str, body: str, html: bool = False, sender: Optional[str] = None, verbose: bool = False) -> bool:
+    """Send email via Microsoft Graph API. Optionally set from address."""
+    message: dict[str, Any] = {
+        "subject": subject,
+        "body": {"contentType": "HTML" if html else "Text", "content": body},
+        "toRecipients": [{"emailAddress": {"address": to}}]
+    }
+
+    # Set custom from address if provided (supports "Name <email>" format)
+    if sender:
+        if "<" in sender and ">" in sender:
+            name = sender.split("<")[0].strip()
+            addr = sender.split("<")[1].split(">")[0].strip()
+            message["from"] = {"emailAddress": {"name": name, "address": addr}}
+        else:
+            message["from"] = {"emailAddress": {"address": sender}}
+
     r = requests.post(
         f"{GRAPH}/me/sendMail",
         headers={"Authorization": f"Bearer {token}", "Content-Type": "application/json"},
-        json={
-            "message": {
-                "subject": subject,
-                "body": {"contentType": "HTML" if html else "Text", "content": body},
-                "toRecipients": [{"emailAddress": {"address": to}}]
-            },
-            "saveToSentItems": True
-        }
+        json={"message": message, "saveToSentItems": True}
     )
+    if verbose and r.status_code != 202:
+        print(f"Error {r.status_code}: {r.text}")
     return r.status_code == 202
 
 
@@ -207,6 +217,29 @@ def main() -> None:
     elif cmd == "templates":
         for t in TEMPLATES.glob("*.md"):
             print(f"  {t.stem}")
+
+    elif cmd == "send-raw":
+        if len(sys.argv) < 5:
+            print("send-raw <to> <subject> <body> [--from sender@domain.org]")
+            sys.exit(1)
+
+        to = sys.argv[2]
+        subject = sys.argv[3]
+        body = sys.argv[4]
+        sender = None
+
+        if "--from" in sys.argv:
+            idx = sys.argv.index("--from")
+            sender = sys.argv[idx + 1] if idx + 1 < len(sys.argv) else None
+
+        token = get_token(config, cache)
+
+        if send(token, to, subject, body, html=False, sender=sender, verbose=True):
+            log_send(to, subject, "raw")
+            print(f"SENT from {sender or 'me'}")
+        else:
+            print("FAILED")
+            sys.exit(1)
 
     elif cmd == "log":
         if not SENT.exists():

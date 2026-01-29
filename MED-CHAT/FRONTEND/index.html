@@ -3,226 +3,225 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MAMMOCHAT | CANONIC</title>
-    <link rel="stylesheet" href="https://canonic-foundation.github.io/assets/style.css">
+    <title>MAMMOCHAT</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg: #0a0a0a;
+            --surface: #141414;
+            --border: #2a2a2a;
+            --text: #e0e0e0;
+            --text-dim: #888;
+            --accent: #10a37f;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        .logo span { color: var(--accent); }
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+        }
+        .user-info img {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+        }
+        .user-info button {
+            background: none;
+            border: none;
+            color: var(--text-dim);
+            cursor: pointer;
+            padding: 0.25rem 0.5rem;
+            font-size: 0.8rem;
+        }
+        .user-info button:hover { color: var(--text); }
+        #chat {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1rem;
+        }
+        .messages {
+            max-width: 48rem;
+            margin: 0 auto;
+        }
+        .message {
+            padding: 1.5rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .message:last-child { border-bottom: none; }
+        .message-header {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+        .message-header.user { color: var(--text); }
+        .message-header.assistant { color: var(--accent); }
+        .message-content {
+            line-height: 1.6;
+            color: var(--text);
+        }
+        .message-content p { margin-bottom: 0.75rem; }
+        .message-content p:last-child { margin-bottom: 0; }
+        #input-area {
+            padding: 1rem;
+            border-top: 1px solid var(--border);
+            background: var(--surface);
+        }
+        #input-container {
+            max-width: 48rem;
+            margin: 0 auto;
+            position: relative;
+        }
+        #chat-input {
+            width: 100%;
+            padding: 1rem 3rem 1rem 1rem;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            color: var(--text);
+            font-size: 1rem;
+            resize: none;
+            outline: none;
+            font-family: inherit;
+        }
+        #chat-input:focus { border-color: var(--accent); }
+        #chat-input::placeholder { color: var(--text-dim); }
+        #send-btn {
+            position: absolute;
+            right: 0.75rem;
+            bottom: 0.75rem;
+            background: var(--accent);
+            border: none;
+            border-radius: 6px;
+            width: 32px;
+            height: 32px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #send-btn svg { fill: white; width: 16px; height: 16px; }
+        #send-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .welcome {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            text-align: center;
+            padding: 2rem;
+        }
+        .welcome h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        .welcome h1 span { color: var(--accent); }
+        .welcome p {
+            color: var(--text-dim);
+            max-width: 28rem;
+        }
+        /* Login screen */
+        .login-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
+            padding: 2rem;
+        }
+        .login-screen h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .login-screen h1 span { color: var(--accent); }
+        .login-screen p {
+            color: var(--text-dim);
+            margin-bottom: 2rem;
+        }
+        .github-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: #24292e;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        .github-btn:hover { background: #2f363d; }
+        .github-btn svg { fill: currentColor; }
+        .login-note {
+            margin-top: 1.5rem;
+            color: var(--text-dim);
+            font-size: 0.85rem;
+        }
+        .login-note a { color: var(--accent); }
+        .no-access {
+            background: rgba(255, 150, 50, 0.1);
+            border: 1px solid rgba(255, 150, 50, 0.3);
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+    </style>
 </head>
 <body>
-    <nav class="topnav">
-        <a href="https://canonic-apps.github.io" class="topnav-brand">&#8745;</a>
-        <div class="topnav-links">
-            <a href="https://canonic-foundation.github.io">Foundation</a>
-            <a href="https://canonic-apps.github.io">Apps</a>
-            <a href="https://canonic-apps.github.io/DOMAIN/">Domain</a>
-            <a href="./" class="active">MammoChat</a>
-        </div>
-    </nav>
+    <div id="app"></div>
 
-    <section class="hero">
-        <h1>MAMMOCHAT</h1>
-        <p class="tagline">Clinical breast imaging AI assistant</p>
-        <span class="badge">ENTERPRISE</span>
-    </section>
-
-    <section class="section">
-        <h2 class="section-title">Certification</h2>
-        <div class="grid">
-            <div class="card" style="border-color: var(--accent);">
-                <h3>20,000+</h3>
-                <p>Patient encounters certified</p>
-            </div>
-            <div class="card">
-                <h3>GitHub Gated</h3>
-                <p>Compliance verified access</p>
-            </div>
-            <div class="card">
-                <h3>2017</h3>
-                <p>Bloomberg Foundation seed</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="section">
-        <h2 class="section-title">Domain</h2>
-        <div class="flow">
-            <span class="flow-item">MEDICINE</span>
-            <span class="flow-arrow">&rarr;</span>
-            <span class="flow-item active">ONCOLOGY</span>
-            <span class="flow-arrow">&rarr;</span>
-            <span class="flow-item active">BREAST</span>
-        </div>
-        <p class="section-subtitle">Inherits: /canonic-domains/MEDICINE/oncology/breast/</p>
-    </section>
-
-    <section class="section">
-        <h2 class="section-title">Access</h2>
-        <div id="auth-container">
-            <div class="auth-box">
-                <div class="loading">Checking access...</div>
-            </div>
-        </div>
-    </section>
-
-    <section class="section" id="chat-section" style="display: none;">
-        <h2 class="section-title">Chat Interface</h2>
-        <div id="chat-container" class="chat-container">
-            <div id="chat-messages" class="chat-messages">
-                <div class="message system">
-                    <p>Welcome to MAMMOCHAT. All interactions are logged to the LEDGER.</p>
-                </div>
-            </div>
-            <form id="chat-form" class="chat-form" onsubmit="return handleChat(event)">
-                <input type="text" id="chat-input" placeholder="Ask about breast imaging...">
-                <button type="submit">Send</button>
-            </form>
-        </div>
-        <p class="note">Backend: COMING. Interactions logged to GitHub.</p>
-    </section>
-
-    <section class="section">
-        <h2 class="section-title">Compliance Flow</h2>
-        <div class="flow">
-            <span class="flow-item" id="step-request">Request</span>
-            <span class="flow-arrow">&rarr;</span>
-            <span class="flow-item" id="step-verify">Verify</span>
-            <span class="flow-arrow">&rarr;</span>
-            <span class="flow-item" id="step-grant">Grant</span>
-            <span class="flow-arrow">&rarr;</span>
-            <span class="flow-item" id="step-access">Access</span>
-        </div>
-        <p class="section-subtitle">GitHub = LEDGER + GATE + INFRASTRUCTURE</p>
-    </section>
-
-    <section class="section">
-        <h2 class="section-title">Requirements</h2>
-        <div class="grid">
-            <div class="card">
-                <h3>HIPAA</h3>
-                <p>BAA signed + training complete</p>
-            </div>
-            <div class="card">
-                <h3>Credentials</h3>
-                <p>Licensed healthcare provider</p>
-            </div>
-            <div class="card">
-                <h3>GitHub</h3>
-                <p>Account for access control</p>
-            </div>
-        </div>
-    </section>
-
-    <footer>
-        <p><a href="https://canonic-foundation.github.io">Foundation</a> | <a href="https://github.com/canonic-apps/MAMMOCHAT">GitHub</a> | <a href="https://canonic-domains.github.io/MEDICINE/">Medicine</a></p>
-        <p>Clinical AI governance. Every decision auditable.</p>
-    </footer>
-
-    <script src="https://canonic-foundation.github.io/assets/nav.js"></script>
     <script>
-        // Configuration
         const GATE_REPO = 'canonic-apps/MAMMOCHAT';
-        const OAUTH_WORKER = 'https://canonic-oauth.workers.dev'; // Deploy oauth-callback.js to Cloudflare
+        const OAUTH_WORKER = 'https://canonic-oauth.dexter-hadley.workers.dev';
         const TOKEN_KEY = 'mammochat_gh_token';
 
-        // Check GitHub repo access
+        let user = null;
+        let messages = [];
+
         async function checkAccess(token) {
             try {
-                const response = await fetch(`https://api.github.com/repos/${GATE_REPO}`, {
+                const r = await fetch(`https://api.github.com/repos/${GATE_REPO}`, {
                     headers: { 'Authorization': `Bearer ${token}`, 'Accept': 'application/vnd.github.v3+json' }
                 });
-                return response.ok;
-            } catch (e) { return false; }
+                return r.ok;
+            } catch { return false; }
         }
 
-        // Get GitHub user
         async function getUser(token) {
             try {
-                const response = await fetch('https://api.github.com/user', {
+                const r = await fetch('https://api.github.com/user', {
                     headers: { 'Authorization': `Bearer ${token}`, 'Accept': 'application/vnd.github.v3+json' }
                 });
-                return response.ok ? await response.json() : null;
-            } catch (e) { return null; }
+                return r.ok ? await r.json() : null;
+            } catch { return null; }
         }
 
-        // Sign in - redirect to OAuth
         function signIn() {
-            const returnUrl = window.location.href.split('#')[0];
-            window.location.href = `${OAUTH_WORKER}/login?return=${encodeURIComponent(returnUrl)}`;
-        }
-
-        // Show login
-        function showLogin() {
-            document.getElementById('auth-container').innerHTML = `
-                <div class="auth-box">
-                    <h3>Sign in with GitHub</h3>
-                    <p>Access requires <code>${GATE_REPO}</code> collaborator status.</p>
-
-                    <button onclick="signIn()" class="btn github-btn">
-                        <svg height="20" viewBox="0 0 16 16" width="20" style="fill: currentColor; vertical-align: middle; margin-right: 8px;">
-                            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
-                        </svg>
-                        Sign in with GitHub
-                    </button>
-
-                    <p class="auth-note">Don't have access? Contact <a href="mailto:dexter@hadleylab.org">dexter@hadleylab.org</a></p>
-                </div>
-            `;
-            highlightStep('request');
-        }
-
-        async function checkAndShowAccess() {
-            const token = localStorage.getItem(TOKEN_KEY);
-            const user = await getUser(token);
-            if (user) {
-                const hasAccess = await checkAccess(token);
-                hasAccess ? showAuthorized(user) : showNoAccess(user);
-            } else {
-                localStorage.removeItem(TOKEN_KEY);
-                showLogin();
-            }
-        }
-
-        function showAuthorized(user) {
-            document.getElementById('auth-container').innerHTML = `
-                <div class="auth-box authorized">
-                    <div class="user-badge">
-                        <img src="${user.avatar_url}" alt="${user.login}" class="avatar">
-                        <div><strong>@${user.login}</strong><span class="access-granted">Access Granted</span></div>
-                    </div>
-                    <button onclick="logout()" class="btn btn-secondary btn-small">Sign out</button>
-                </div>
-            `;
-            document.getElementById('chat-section').style.display = 'block';
-            highlightStep('access');
-        }
-
-        function showNoAccess(user) {
-            document.getElementById('auth-container').innerHTML = `
-                <div class="auth-box pending">
-                    <div class="user-badge">
-                        <img src="${user.avatar_url}" alt="${user.login}" class="avatar">
-                        <div><strong>@${user.login}</strong><span class="access-pending">No Access</span></div>
-                    </div>
-                    <p>You don't have access to <code>${GATE_REPO}</code></p>
-                    <p>Contact <a href="mailto:dexter@hadleylab.org">dexter@hadleylab.org</a> to request access.</p>
-                    <button onclick="logout()" class="btn btn-secondary btn-small">Sign out</button>
-                </div>
-            `;
-            highlightStep('request');
-        }
-
-        function highlightStep(step) {
-            ['request', 'verify', 'grant', 'access'].forEach(s => {
-                const el = document.getElementById('step-' + s);
-                if (el) el.classList.remove('active', 'completed');
-            });
-            const steps = ['request', 'verify', 'grant', 'access'];
-            const idx = steps.indexOf(step);
-            steps.forEach((s, i) => {
-                const el = document.getElementById('step-' + s);
-                if (el) {
-                    if (i < idx) el.classList.add('completed');
-                    if (i === idx) el.classList.add('active');
-                }
-            });
+            window.location.href = `${OAUTH_WORKER}/login?return=${encodeURIComponent(location.href.split('#')[0])}`;
         }
 
         function logout() {
@@ -230,263 +229,127 @@
             location.reload();
         }
 
-        function handleChat(e) {
-            e.preventDefault();
-            const input = document.getElementById('chat-input');
-            const messages = document.getElementById('chat-messages');
-            const text = input.value.trim();
-            if (!text) return false;
-            messages.innerHTML += `<div class="message user"><p>${text}</p></div>`;
-            messages.innerHTML += `<div class="message assistant"><p>Backend integration coming. Your message has been logged.</p></div>`;
-            input.value = '';
-            messages.scrollTop = messages.scrollHeight;
-            return false;
-        }
-
-        // Handle OAuth callback (token in URL fragment)
-        function handleOAuthCallback() {
-            const hash = window.location.hash;
-            if (hash.includes('token=')) {
-                const token = hash.split('token=')[1].split('&')[0];
+        function handleOAuth() {
+            if (location.hash.includes('token=')) {
+                const token = location.hash.split('token=')[1].split('&')[0];
                 if (token) {
                     localStorage.setItem(TOKEN_KEY, token);
-                    // Clear hash without reload
-                    history.replaceState(null, '', window.location.pathname);
+                    history.replaceState(null, '', location.pathname);
                     return true;
                 }
             }
             return false;
         }
 
-        async function init() {
-            // Check for OAuth callback first
-            handleOAuthCallback();
+        function renderLogin() {
+            document.getElementById('app').innerHTML = `
+                <div class="login-screen">
+                    <h1>MAMMO<span>CHAT</span></h1>
+                    <p>Clinical breast imaging AI assistant</p>
+                    <button class="github-btn" onclick="signIn()">
+                        <svg height="20" width="20" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+                        Sign in with GitHub
+                    </button>
+                    <p class="login-note">Access requires authorization. <a href="mailto:dexter@hadleylab.org">Request access</a></p>
+                </div>
+            `;
+        }
 
-            const token = localStorage.getItem(TOKEN_KEY);
-            if (token) {
-                await checkAndShowAccess();
-            } else {
-                showLogin();
+        function renderNoAccess() {
+            document.getElementById('app').innerHTML = `
+                <div class="login-screen">
+                    <h1>MAMMO<span>CHAT</span></h1>
+                    <p>Clinical breast imaging AI assistant</p>
+                    <div class="no-access">
+                        <strong>@${user.login}</strong> - No access to ${GATE_REPO}
+                        <p style="margin-top:0.5rem">Contact <a href="mailto:dexter@hadleylab.org">dexter@hadleylab.org</a> to request access.</p>
+                    </div>
+                    <button class="github-btn" onclick="logout()" style="margin-top:1rem;background:var(--border)">Sign out</button>
+                </div>
+            `;
+        }
+
+        function renderChat() {
+            const msgHtml = messages.length ? messages.map(m => `
+                <div class="message">
+                    <div class="message-header ${m.role}">${m.role === 'user' ? 'You' : 'MammoChat'}</div>
+                    <div class="message-content"><p>${m.content}</p></div>
+                </div>
+            `).join('') : `
+                <div class="welcome">
+                    <h1>MAMMO<span>CHAT</span></h1>
+                    <p>Ask questions about breast imaging, BI-RADS classification, screening guidelines, or clinical cases.</p>
+                </div>
+            `;
+
+            document.getElementById('app').innerHTML = `
+                <header>
+                    <div class="logo"><span>&#8745;</span> MAMMOCHAT</div>
+                    <div class="user-info">
+                        <img src="${user.avatar_url}" alt="${user.login}">
+                        <span>@${user.login}</span>
+                        <button onclick="logout()">Sign out</button>
+                    </div>
+                </header>
+                <div id="chat"><div class="messages">${msgHtml}</div></div>
+                <div id="input-area">
+                    <div id="input-container">
+                        <textarea id="chat-input" rows="1" placeholder="Message MammoChat..." onkeydown="handleKey(event)"></textarea>
+                        <button id="send-btn" onclick="sendMessage()">
+                            <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            const chat = document.getElementById('chat');
+            chat.scrollTop = chat.scrollHeight;
+            document.getElementById('chat-input').focus();
+        }
+
+        function handleKey(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
             }
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('chat-input');
+            const text = input.value.trim();
+            if (!text) return;
+
+            messages.push({ role: 'user', content: text });
+            messages.push({ role: 'assistant', content: 'Backend integration coming soon. Your message has been received.' });
+            renderChat();
+        }
+
+        async function init() {
+            handleOAuth();
+            const token = localStorage.getItem(TOKEN_KEY);
+
+            if (!token) {
+                renderLogin();
+                return;
+            }
+
+            user = await getUser(token);
+            if (!user) {
+                localStorage.removeItem(TOKEN_KEY);
+                renderLogin();
+                return;
+            }
+
+            const hasAccess = await checkAccess(token);
+            if (!hasAccess) {
+                renderNoAccess();
+                return;
+            }
+
+            renderChat();
         }
 
         init();
     </script>
-    <style>
-        .chat-container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: var(--surface);
-            border-radius: 8px;
-            overflow: hidden;
-        }
-        .chat-messages {
-            min-height: 300px;
-            max-height: 400px;
-            overflow-y: auto;
-            padding: 1rem;
-        }
-        .message {
-            margin-bottom: 1rem;
-            padding: 0.75rem 1rem;
-            border-radius: 8px;
-        }
-        .message.system {
-            background: var(--bg);
-            border-left: 3px solid var(--accent);
-        }
-        .message.user {
-            background: var(--accent);
-            color: var(--bg);
-            margin-left: 2rem;
-        }
-        .message.assistant {
-            background: var(--bg);
-            margin-right: 2rem;
-        }
-        .chat-form {
-            display: flex;
-            padding: 1rem;
-            border-top: 1px solid var(--border);
-        }
-        .chat-form input {
-            flex: 1;
-            padding: 0.75rem;
-            background: var(--bg);
-            border: 1px solid var(--border);
-            border-radius: 4px 0 0 4px;
-            color: var(--text);
-        }
-        .chat-form button {
-            padding: 0.75rem 1.5rem;
-            background: var(--accent);
-            color: var(--bg);
-            border: none;
-            border-radius: 0 4px 4px 0;
-            cursor: pointer;
-        }
-        .note {
-            text-align: center;
-            margin-top: 1rem;
-            color: var(--text-secondary);
-        }
-        .auth-box {
-            max-width: 500px;
-            margin: 0 auto;
-            padding: 2rem;
-            background: var(--surface);
-            border-radius: 8px;
-            text-align: center;
-        }
-        .auth-box code {
-            background: var(--bg);
-            padding: 0.25rem 0.5rem;
-            border-radius: 4px;
-            font-size: 0.9rem;
-        }
-        .btn {
-            display: inline-block;
-            padding: 0.75rem 1.5rem;
-            background: var(--accent);
-            color: var(--bg);
-            text-decoration: none;
-            border-radius: 4px;
-            margin: 0.5rem;
-            border: none;
-            cursor: pointer;
-            font-size: 1rem;
-        }
-        .btn-secondary {
-            background: var(--border);
-            color: var(--text);
-        }
-        .btn-small {
-            padding: 0.5rem 1rem;
-            font-size: 0.85rem;
-        }
-        .github-btn {
-            background: #24292e;
-            color: white;
-            display: inline-flex;
-            align-items: center;
-        }
-        .auth-note {
-            margin-top: 1rem;
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
-        .divider {
-            margin: 1.5rem 0;
-            color: var(--text-secondary);
-            position: relative;
-        }
-        .divider::before, .divider::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            width: 40%;
-            height: 1px;
-            background: var(--border);
-        }
-        .divider::before { left: 0; }
-        .divider::after { right: 0; }
-        .token-input {
-            width: 100%;
-            padding: 0.75rem;
-            margin: 0.5rem 0;
-            background: var(--bg);
-            border: 1px solid var(--border);
-            border-radius: 4px;
-            color: var(--text);
-        }
-        .access-steps {
-            text-align: left;
-            margin: 1.5rem 0;
-        }
-        .step {
-            display: flex;
-            align-items: flex-start;
-            margin: 1rem 0;
-            gap: 1rem;
-        }
-        .step-num {
-            background: var(--accent);
-            color: var(--bg);
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            flex-shrink: 0;
-        }
-        .step p {
-            margin: 0.25rem 0 0 0;
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
-        .user-badge {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            justify-content: center;
-            margin-bottom: 1rem;
-        }
-        .avatar {
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-        }
-        .access-granted {
-            display: block;
-            color: #6bff6b;
-            font-size: 0.85rem;
-        }
-        .access-pending {
-            display: block;
-            color: #ffbb6b;
-            font-size: 0.85rem;
-        }
-        .authorized {
-            border: 1px solid rgba(100, 255, 100, 0.3);
-        }
-        .pending {
-            border: 1px solid rgba(255, 187, 107, 0.3);
-        }
-        .flow-item.completed {
-            opacity: 0.5;
-        }
-        .flow-item.completed::after {
-            content: ' ✓';
-        }
-        .device-code {
-            font-family: monospace;
-            font-size: 2.5rem;
-            font-weight: bold;
-            letter-spacing: 0.5rem;
-            background: var(--bg);
-            padding: 1rem 2rem;
-            border-radius: 8px;
-            margin: 1.5rem 0;
-            color: var(--accent);
-        }
-        .code-link {
-            color: var(--accent);
-            font-weight: bold;
-        }
-        .spinner {
-            width: 24px;
-            height: 24px;
-            border: 3px solid var(--border);
-            border-top-color: var(--accent);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 1rem auto;
-        }
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-    </style>
 </body>
 </html>

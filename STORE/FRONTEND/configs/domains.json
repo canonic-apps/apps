@@ -5,40 +5,42 @@
     "badge": "DOMAINS",
     "sections": [
         {
-            "title": "DOMAIN ZERO",
-            "subtitle": "CANONIC governs CANONIC.",
+            "title": "DOMAINS",
+            "subtitle": "",
             "type": "grid",
             "items": [
-                {"title": "CANONIC", "description": "The first domain. Self-governing. Fixed point.", "url": "https://canonic-foundation.github.io", "active": true}
+                {"title": "MEDICINE", "description": "Clinical credentialing. Oncology protocols. Psychiatric frameworks. 20,000+ patient encounters governed. Evidence-first healthcare."},
+                {"title": "LAW", "description": "Legal document governance. Contract validation. Compliance verification. Constitutional constraints for legal AI."},
+                {"title": "FINANCE", "description": "Asset governance. Audit trails. Regulatory compliance. Every transaction governed by axiom."}
             ]
         },
         {
-            "title": "VERTICAL DOMAINS",
-            "subtitle": "Domain-specific governance.",
+            "title": "DIMENSIONS",
+            "subtitle": "",
             "type": "grid",
             "items": [
-                {"title": "MEDICINE", "description": "Clinical governance. Oncology. Psychiatry."},
-                {"title": "LAW", "description": "Legal governance. Contracts. Compliance."},
-                {"title": "FINANCE", "description": "Asset governance. Audit trails."}
+                {"title": "DECLARATIVE", "description": "What is stated. The specification. CANON.md exists and declares intent."},
+                {"title": "EVIDENTIAL", "description": "What is proven. The ledger. Every claim has a commit. Every commit has a timestamp."},
+                {"title": "TEMPORAL", "description": "When it happened. The timeline. Immutable history. Git as truth."},
+                {"title": "RELATIONAL", "description": "How things connect. The inheritance. Constraints flow down. Never weaken."},
+                {"title": "OPERATIONAL", "description": "How it runs. The validators. Code enforces what spec declares."},
+                {"title": "STRUCTURAL", "description": "How it's organized. The triad. Every scope has CANON, VOCAB, README."}
             ]
         },
         {
-            "title": "DETROS",
-            "subtitle": "The six dimensions.",
-            "type": "grid",
+            "title": "EVOLUTION",
+            "subtitle": "EVO = LEDGER + TRANSCRIPTS. DOMAINS timeline.",
+            "type": "timeline",
             "items": [
-                {"title": "D", "description": "DECLARATIVE. What is stated."},
-                {"title": "E", "description": "EVIDENTIAL. What is proven."},
-                {"title": "T", "description": "TEMPORAL. When it happened."},
-                {"title": "R", "description": "RELATIONAL. How things connect."},
-                {"title": "O", "description": "OPERATIONAL. How it runs."},
-                {"title": "S", "description": "STRUCTURAL. How it's organized."}
+                {"title": "v0 ORIGIN", "description": "Dec 2025. MEDICINE domain. 20,000+ patient encounters."},
+                {"title": "v1 MACHINE", "description": "Jan 2026. Domain validators. DETROS enforcement."},
+                {"title": "v2 FOUNDATION", "description": "Now. LAW domain live. FINANCE in development.", "active": true},
+                {"title": "v3 DISTRIBUTED", "description": "Next. Custom domains. Certified domain experts."}
             ]
         }
     ],
     "footer_links": [
         {"text": "Foundation", "url": "https://canonic-foundation.github.io"},
-        {"text": "Apps", "url": "https://canonic-apps.github.io"},
         {"text": "GitHub", "url": "https://github.com/canonic-domains"}
     ]
 }

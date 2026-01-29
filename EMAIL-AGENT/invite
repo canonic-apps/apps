@@ -1,0 +1,95 @@
+#!/bin/bash
+# CANONIC Invite — Invite users by email (with or without GitHub)
+#
+# Usage:
+#   invite <email>                    # Email-only (sends GitHub signup instructions)
+#   invite <email> --github <user>    # Has GitHub account (adds as collaborator)
+#
+# GitHub = LEDGER + GATE + INFRASTRUCTURE
+
+set -e
+
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+APP="MAMMOCHAT"
+REPO="canonic-apps/MAMMOCHAT"
+APP_URL="https://canonic-apps.github.io/MED-CHAT/"
+
+EMAIL=""
+GITHUB_USER=""
+
+while [[ $# -gt 0 ]]; do
+    case $1 in
+        --github|-g)
+            GITHUB_USER="$2"
+            shift 2
+            ;;
+        --app)
+            APP="$2"
+            shift 2
+            ;;
+        *)
+            EMAIL="$1"
+            shift
+            ;;
+    esac
+done
+
+if [ -z "$EMAIL" ]; then
+    echo "CANONIC Invite"
+    echo ""
+    echo "Usage:"
+    echo "  invite doctor@hospital.org                    # No GitHub yet"
+    echo "  invite doctor@hospital.org --github drsmith   # Has GitHub"
+    echo ""
+    exit 1
+fi
+
+echo "=== CANONIC INVITE ==="
+echo "Email: $EMAIL"
+echo "GitHub: ${GITHUB_USER:-'(will create)'}"
+echo "App: $APP"
+echo ""
+
+if [ -n "$GITHUB_USER" ]; then
+    # Has GitHub — add as collaborator
+    echo "[1/1] Adding $GITHUB_USER as collaborator..."
+    gh api --method PUT \
+        -H "Accept: application/vnd.github+json" \
+        "/repos/$REPO/collaborators/$GITHUB_USER" \
+        -f permission='pull' 2>/dev/null \
+        && echo "      ✓ GitHub invitation sent to $GITHUB_USER" \
+        || echo "      ✗ Failed (may already be collaborator)"
+
+    echo ""
+    echo "Done. $GITHUB_USER will receive GitHub's invitation email."
+    echo "After accepting: $APP_URL"
+else
+    # No GitHub — send signup instructions via system mail
+    echo "[1/1] Sending signup instructions to $EMAIL..."
+
+    SUBJECT="You're invited to MAMMOCHAT"
+    BODY="You've been invited to MAMMOCHAT - Clinical breast imaging AI assistant.
+
+To get access:
+
+1. Create a free GitHub account: https://github.com/signup
+   (Use this email: $EMAIL)
+
+2. Reply to this email with your GitHub username
+
+3. You'll receive an invitation to access the app
+
+Questions? Reply to this email.
+
+--
+CANONIC | Clinical AI Governance
+https://canonic-foundation.github.io"
+
+    # Send via Microsoft Graph
+    python3 "$SCRIPT_DIR/canonic_email.py" send-raw "$EMAIL" "$SUBJECT" "$BODY" 2>/dev/null \
+        && echo "      ✓ Email sent via Graph (iDrDex@CANONIC.org)" \
+        || echo "      ✗ Graph send failed"
+fi
+
+echo ""
+echo "=== INVITE COMPLETE ==="

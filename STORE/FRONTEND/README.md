@@ -38,6 +38,7 @@ git push -u origin main
 |------|---------|
 | [CANON.md](CANON.md) | FRONTEND specification |
 | [BACKEND.md](BACKEND.md) | BACKEND ↔ FRONTEND coordination |
+| [GITHUB.md](GITHUB.md) | GitHub Pages deployment |
 | [generator.py](generator.py) | HTML generator |
 | configs/*.json | Org-specific configs |
 

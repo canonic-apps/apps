@@ -5,18 +5,18 @@
     "badge": "FOUNDATION",
     "sections": [
         {
-            "title": "CANONVERSE",
-            "subtitle": "One constitution. Infinite implementations.",
+            "title": "FOUNDATION",
+            "subtitle": "Three pillars. One constitution.",
             "type": "grid",
             "items": [
-                {"title": "APPS", "description": "App Store. ENTERPRISE certified.", "url": "https://canonic-apps.github.io"},
+                {"title": "AGENT", "description": "Hidden entry point. Human alone is valid.", "url": "https://canonic-foundation.github.io/AGENT/"},
                 {"title": "DOMAINS", "description": "Vertical governance. MEDICINE, LAW, FINANCE.", "url": "https://canonic-domains.github.io"},
-                {"title": "DEXTER", "description": "User #0. First certified dev.", "url": "https://hadleylab-dexter.github.io"}
+                {"title": "COMPLIANCE", "description": "Tier governance. CLOSURE, COMMUNITY, BUSINESS, ENTERPRISE.", "url": "https://canonic-foundation.github.io/LANGUAGE/COMPLIANCE/"}
             ]
         },
         {
-            "title": "ROADMAP",
-            "subtitle": "Each era discovers the next.",
+            "title": "EVOLUTION",
+            "subtitle": "EVO = LEDGER + TRANSCRIPTS. Each era discovers the next.",
             "type": "timeline",
             "items": [
                 {"title": "v0 ORIGIN", "description": "Dec 2025. Three axioms. Fixed point."},
@@ -37,7 +37,9 @@
         }
     ],
     "footer_links": [
-        {"text": "Apps", "url": "https://canonic-apps.github.io"},
+        {"text": "Agent", "url": "https://canonic-foundation.github.io/AGENT/"},
+        {"text": "Domains", "url": "https://canonic-domains.github.io"},
+        {"text": "Compliance", "url": "https://canonic-foundation.github.io/LANGUAGE/COMPLIANCE/"},
         {"text": "GitHub", "url": "https://github.com/canonic-foundation"}
     ]
 }

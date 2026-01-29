@@ -17,3 +17,6 @@ __pycache__/
 # IDE
 .vscode/
 .idea/
+
+# Sent emails log
+sent/

@@ -14,6 +14,7 @@ inherits: CANON.md
 | [MAMMOCHAT](https://github.com/hadleylab-dexter/hadleylab/tree/main/STORE/APPS/MAMMOCHAT) | hadleylab-dexter | medicine | #63 | registered |
 | [CREDENTIALING](https://github.com/hadleylab-dexter/hadleylab/tree/main/STORE/APPS/CREDENTIALING) | hadleylab-dexter | — | D∩S | registered |
 | [GENOMICS](https://github.com/hadleylab-dexter/hadleylab/tree/main/STORE/APPS/GENOMICS) | hadleylab-dexter | genomics | — | archived |
+| [BOOK](BOOK.md) | canonic-foundation | publishing | #63 | coming soon |
 
 ---
 
