@@ -9,7 +9,7 @@
             "subtitle": "Three pillars. One constitution.",
             "type": "grid",
             "items": [
-                {"title": "AGENT", "description": "Hidden entry point. Human alone is valid.", "url": "https://canonic-foundation.github.io/AGENT/"},
+                {"title": "CHAT", "description": "Ask anything. Open interface.", "url": "https://canonic-foundation.github.io/CHAT/", "active": true},
                 {"title": "DOMAINS", "description": "Vertical governance. MEDICINE, LAW, FINANCE.", "url": "https://canonic-domains.github.io"},
                 {"title": "COMPLIANCE", "description": "Tier governance. CLOSURE, COMMUNITY, BUSINESS, ENTERPRISE.", "url": "https://canonic-foundation.github.io/LANGUAGE/COMPLIANCE/"}
             ]
@@ -37,7 +37,7 @@
         }
     ],
     "footer_links": [
-        {"text": "Agent", "url": "https://canonic-foundation.github.io/AGENT/"},
+        {"text": "Chat", "url": "https://canonic-foundation.github.io/CHAT/"},
         {"text": "Domains", "url": "https://canonic-domains.github.io"},
         {"text": "Compliance", "url": "https://canonic-foundation.github.io/LANGUAGE/COMPLIANCE/"},
         {"text": "GitHub", "url": "https://github.com/canonic-foundation"}
