@@ -1,6 +1,6 @@
 # SCHEMA — CANON
 
-inherits: /CANONIC/LANGUAGE/DIMENSIONS/STRUCTURAL/
+inherits: /MED/CHAT/, /CANONIC/LANGUAGE/DIMENSIONS/STRUCTURAL/
 
 ---
 
@@ -19,20 +19,10 @@ interface Session {
   id: string;                    // UUID
   created: string;               // ISO8601
   patient_hash: string;          // Privacy-preserving ID
-  context: PatientContext;
+  context: DomainContext;        // Domain-specific
   messages: Message[];
+  opts_tokens: OPTSToken[];
   state: 'ACTIVE' | 'CLOSED';
-}
-```
-
-### PatientContext
-
-```typescript
-interface PatientContext {
-  diagnosis_type: 'DCIS' | 'INVASIVE' | 'UNKNOWN';
-  treatment_phase: 'SCREENING' | 'DIAGNOSIS' | 'TREATMENT' | 'SURVIVORSHIP';
-  birads_category?: 0 | 1 | 2 | 3 | 4 | 5 | 6;
-  molecular_subtype?: 'ER+' | 'HER2+' | 'TNBC' | 'UNKNOWN';
 }
 ```
 
@@ -42,10 +32,23 @@ interface PatientContext {
 interface Message {
   id: string;
   timestamp: string;
-  role: 'PATIENT' | 'MAMMOCHAT' | 'CLINICIAN';
+  role: 'PATIENT' | 'CHAT' | 'CLINICIAN';
   content: string;
   evidence_chain: EvidenceRef[];
   flags: MessageFlag[];
+  opts_token: string;            // Reference to OPTS token
+}
+```
+
+### OPTSToken
+
+```typescript
+interface OPTSToken {
+  type: 'OPTS-Data' | 'OPTS-Consent' | 'OPTS-Credential';
+  hash: string;                  // Content-addressed hash
+  metadata: object;              // Domain-specific (FHIR/mCODE)
+  signature: string;             // Patient signature
+  timestamp: string;             // ISO8601
 }
 ```
 
@@ -53,8 +56,8 @@ interface Message {
 
 ```typescript
 interface EvidenceRef {
-  source: 'NCCN' | 'BIRADS' | 'TRIAL';
-  citation: string;           // e.g., "NCCN.Breast.2024.3.2"
+  source: string;                // Domain-specific source
+  citation: string;              // Full citation
   authority: 'GOLD' | 'SILVER' | 'BRONZE';
 }
 ```
@@ -71,29 +74,14 @@ type MessageFlag =
 
 ---
 
-## Validation Structures
-
-### ValidationResult
-
-```typescript
-interface ValidationResult {
-  claim: string;
-  status: 'VALID' | 'BLOCKED' | 'FLAGGED';
-  evidence: EvidenceRef[];
-  reason?: string;
-  timestamp: string;
-}
-```
-
----
-
 ## Constraints
 
 1. All structures MUST be JSON-serializable.
 2. All timestamps MUST be ISO8601 with timezone.
 3. Patient identifiers MUST be hashed.
 4. Evidence references MUST be resolvable.
+5. OPTS tokens MUST be included for audit.
 
 ---
 
-*SCHEMA | S dimension | Structural definitions*
+*SCHEMA | S dimension | Base structural definitions*

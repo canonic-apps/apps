@@ -1,6 +1,6 @@
 # WRITING — Operation
 
-inherits: /MED-CHAT/ENGINE/
+inherits: /MED/CHAT/ENGINE/
 
 ---
 
@@ -13,7 +13,7 @@ WRITING = Clinician validates/adds clinical knowledge.
 ## Flow
 
 ```
-CREDENTIAL → INPUT → VALIDATE → CANON → LEDGER → TOKEN
+CREDENTIAL → INPUT → VALIDATE → CANON → OPTS → LEDGER → TOKEN
 ```
 
 ---
@@ -23,7 +23,7 @@ CREDENTIAL → INPUT → VALIDATE → CANON → LEDGER → TOKEN
 1. WRITING MUST require NPI-credentialed USER.
 2. WRITING MUST validate against EVIDENCE before commit.
 3. WRITING MUST audit to LEDGER with clinician identity.
-4. WRITING MUST generate TOKEN on valid contribution.
+4. WRITING MUST generate OPTS-Data token on valid contribution.
 5. WRITING MUST NOT bypass VALIDATING.
 
 ---
@@ -34,7 +34,7 @@ CREDENTIAL → INPUT → VALIDATE → CANON → LEDGER → TOKEN
 USER ──► NPI ──► CANONIC/CREDENTIALING-APP
   │        │            │
   ▼        ▼            ▼
-MINH    1234567890    VERIFIED
+name    1234567890    VERIFIED
 ```
 
 | Credential | Authority | Scope |
@@ -49,22 +49,10 @@ MINH    1234567890    VERIFIED
 ## Token Generation
 
 ```
-VALID_WRITE ──► CANON ──► LEDGER ──► TOKEN
-                           │           │
-                           ▼           ▼
-                     audit trail    market value
-```
-
-WRITING produces VALUE through validated clinical contribution.
-
----
-
-## Market for Work
-
-```
-TOKENS ← WRITING → MARKET ← WORK → VALUE
-
-Clinician writes → Knowledge validated → TOKEN issued
+VALID_WRITE ──► CANON ──► LEDGER ──► OPTS-Data ──► TOKEN
+                           │                         │
+                           ▼                         ▼
+                     audit trail              market value
 ```
 
 ---

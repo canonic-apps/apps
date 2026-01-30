@@ -1,6 +1,6 @@
 # EVIDENCE — CANON
 
-inherits: /CANONIC/LANGUAGE/DIMENSIONS/EVIDENTIAL/
+inherits: /MED/MAMMO/CHAT/, /CANONIC/LANGUAGE/DIMENSIONS/EVIDENTIAL/
 
 ---
 
@@ -13,10 +13,10 @@ inherits: /CANONIC/LANGUAGE/DIMENSIONS/EVIDENTIAL/
 ## Sources
 
 ```
-EVIDENCE/
-├── NCCN/      — National Comprehensive Cancer Network
+MED/MAMMO/CHAT/EVIDENCE/
+├── NCCN/      — National Comprehensive Cancer Network (Breast)
 ├── BIRADS/    — Breast Imaging Reporting and Data System
-└── TRIALS/    — Clinical trial data
+└── MCODE/     — minimal Common Oncology Data Elements
 ```
 
 ---
@@ -25,12 +25,12 @@ EVIDENCE/
 
 | Source | Weight | Update Cycle |
 |--------|--------|--------------|
-| NCCN Guidelines | 1.0 | Annual |
+| NCCN Breast Guidelines | 1.0 | Annual |
 | BIRADS Atlas | 0.9 | ~10 years |
+| mCODE STU3 | 0.9 | Periodic |
 | Phase 3 Trials | 0.8 | As published |
 | Phase 2 Trials | 0.6 | As published |
 | Expert Consensus | 0.5 | Variable |
-| Case Reports | 0.3 | Variable |
 
 ---
 
@@ -40,6 +40,7 @@ EVIDENCE/
 2. EVIDENCE MUST be versioned.
 3. EVIDENCE MUST NOT contradict higher-authority sources.
 4. EVIDENCE MUST be machine-readable.
+5. EVIDENCE MUST support mCODE precision embedding.
 
 ---
 
@@ -55,4 +56,4 @@ CLAIM ──► requires ──► EVIDENCE ──► cites ──► SOURCE
 
 ---
 
-*EVIDENCE | E dimension | Clinical truth grounding*
+*EVIDENCE | E dimension | Breast cancer truth grounding*

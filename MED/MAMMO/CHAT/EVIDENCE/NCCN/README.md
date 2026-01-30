@@ -1,12 +1,12 @@
 # NCCN — Evidence Source
 
-inherits: /MED-CHAT/EVIDENCE/
+inherits: /MED/MAMMO/CHAT/EVIDENCE/
 
 ---
 
 ## Purpose
 
-NCCN = National Comprehensive Cancer Network Guidelines.
+NCCN = National Comprehensive Cancer Network Guidelines (Breast).
 
 **Authority:** GOLD (highest)
 
@@ -61,4 +61,4 @@ NCCN.Breast.2024.Section.X.Y
 
 ---
 
-*NCCN | GOLD evidence | Clinical guidelines*
+*NCCN | GOLD evidence | Breast cancer guidelines*

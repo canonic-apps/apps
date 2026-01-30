@@ -1,6 +1,6 @@
 # ENGINE — CANON
 
-inherits: /CANONIC/LANGUAGE/DIMENSIONS/OPERATIONAL/
+inherits: /MED/CHAT/, /CANONIC/LANGUAGE/DIMENSIONS/OPERATIONAL/
 
 ---
 
@@ -24,37 +24,25 @@ VALIDATING — O (verify)     → EVIDENCE
 
 ### READING
 
-- READING MUST inherit from EVIDENCE.
+- READING MUST inherit from domain EVIDENCE.
 - READING MUST log to LEDGER with timestamp.
 - READING MUST NOT return claims without evidence chain.
 - READING MUST flag emotional content.
+- READING MUST generate OPTS-Consent token.
 
 ### WRITING
 
-- WRITING MUST require credentialed USER.
+- WRITING MUST require credentialed USER (NPI).
 - WRITING MUST validate against CANON before commit.
-- WRITING MUST generate TOKEN on valid contribution.
+- WRITING MUST generate OPTS-Data token on valid contribution.
 - WRITING MUST audit to LEDGER.
 
 ### VALIDATING
 
-- VALIDATING MUST cross-reference EVIDENCE sources.
+- VALIDATING MUST cross-reference domain EVIDENCE sources.
 - VALIDATING MUST block undefined claims.
 - VALIDATING MUST log violations for INTROSPECTION.
 - VALIDATING MUST return evidence chain on success.
-
----
-
-## Clinical Constraints
-
-From Minh's clinical review:
-
-| Constraint | Operation | Enforcement |
-|------------|-----------|-------------|
-| DCIS vs invasive | VALIDATING | Pathology evidence REQUIRED |
-| Patient context | READING | Session state MAINTAINED |
-| Empathy risk | READING | Emotional claims FLAGGED |
-| Misinformation | VALIDATING | Claims without evidence BLOCKED |
 
 ---
 
@@ -64,13 +52,13 @@ From Minh's clinical review:
 ENGINE (O)
     │
     ├── READING (O)
-    │   └── → EVIDENCE → LEDGER → RESPONSE
+    │   └── QUERY → EVIDENCE → LEDGER → OPTS → RESPONSE
     │
     ├── WRITING (O)
-    │   └── CREDENTIAL → CANON → LEDGER → TOKEN
+    │   └── CREDENTIAL → CANON → LEDGER → OPTS → TOKEN
     │
     └── VALIDATING (O∩E∩S = index 19)
-        └── CLAIM → EVIDENCE → RESULT
+        └── CLAIM → EVIDENCE → OPTS → RESULT
 ```
 
 ---
@@ -85,4 +73,4 @@ ENGINE (O)
 
 ---
 
-*ENGINE | O dimension enforcement | min CANON / max GOVERNANCE*
+*ENGINE | O dimension | Base operational layer*

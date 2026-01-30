@@ -1,6 +1,6 @@
 # mCODE — Embedding Layer
 
-inherits: /MED-CHAT/EVIDENCE/
+inherits: /MED/MAMMO/CHAT/EVIDENCE/
 
 ---
 
@@ -50,18 +50,9 @@ Text → mCODE Parser → Concept[SNOMED] → Vector[mCODE]
 
 ---
 
-## Old vs DETROS Approach
+## DETROS Approach
 
 ```
-OLD (LLM Translator):
-─────────────────────
-Text → LLM → mCODE JSON
-         │
-         └── LLM "guesses" structure
-         └── Embedding = text similarity only
-
-DETROS (mCODE Embedding Layer):
-───────────────────────────────
 Text → mCODE EMBED → Vector[clinical] → ENGINE
               │              │
               ▼              ▼
@@ -112,31 +103,7 @@ VALIDATOR: "Histology required for treatment recommendation"
 
 ---
 
-## Breast Cancer Elements
-
-### Primary Cancer Condition
-
-```json
-{
-  "resourceType": "Condition",
-  "code": {
-    "coding": [{
-      "system": "http://snomed.info/sct",
-      "code": "254837009",
-      "display": "Malignant neoplasm of breast"
-    }]
-  },
-  "bodySite": [{
-    "coding": [{
-      "system": "http://snomed.info/sct",
-      "code": "76752008",
-      "display": "Breast structure"
-    }]
-  }]
-}
-```
-
-### DCIS vs Invasive (Minh's concern)
+## DCIS vs Invasive
 
 ```
 DCIS:     SNOMED 109886000
@@ -181,4 +148,4 @@ Example: `mCODE.STU3.PrimaryCancerCondition.histologyMorphologyBehavior`
 
 ---
 
-*mCODE | S∩E∩R = Structured Evidence | FHIR-based ontology*
+*mCODE | S∩E∩R = Precision Cancer Embedding | FHIR-based ontology*

@@ -1,6 +1,6 @@
 # READING — Operation
 
-inherits: /MED-CHAT/ENGINE/
+inherits: /MED/CHAT/ENGINE/
 
 ---
 
@@ -13,7 +13,7 @@ READING = Patient consumes clinical guidance.
 ## Flow
 
 ```
-QUERY → CONTEXT → EVIDENCE → VALIDATE → RESPONSE → LEDGER
+QUERY → CONTEXT → EVIDENCE → VALIDATE → OPTS → RESPONSE → LEDGER
 ```
 
 ---
@@ -25,18 +25,17 @@ QUERY → CONTEXT → EVIDENCE → VALIDATE → RESPONSE → LEDGER
 3. READING MUST flag emotional/empathetic content.
 4. READING MUST log to LEDGER with timestamp.
 5. READING MUST NOT hallucinate medical facts.
+6. READING MUST generate OPTS-Consent token.
 
 ---
 
 ## Context Awareness
 
-From Minh's concern: "nuances to treatment decisions"
-
 ```
 Session State:
 ├── patient_id (anonymous hash)
-├── diagnosis_context (DCIS | invasive | unknown)
-├── treatment_phase (screening | diagnosis | treatment | survivorship)
+├── diagnosis_context (domain-specific)
+├── treatment_phase (domain-specific)
 └── conversation_history (temporal chain)
 ```
 
@@ -48,7 +47,7 @@ Session State:
 CLAIM ──► EVIDENCE_SOURCE ──► CITATION
   │           │                   │
   ▼           ▼                   ▼
-"Stage 1"   NCCN.2024         "NCCN Guidelines v2.2024"
+claim     SOURCE.YEAR         "Citation text"
 ```
 
 ---

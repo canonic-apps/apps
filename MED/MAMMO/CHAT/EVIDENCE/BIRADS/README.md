@@ -1,6 +1,6 @@
 # BIRADS — Evidence Source
 
-inherits: /MED-CHAT/EVIDENCE/
+inherits: /MED/MAMMO/CHAT/EVIDENCE/
 
 ---
 
