@@ -1,5 +1,7 @@
 # Email to Avinash — ATOM CREDENTIALING Demo
 
+inherits: /ATOM-CREDENTIALING/
+
 **To:** avinash@canonic.org / [personal email]
 **Subject:** Your app is ready — let's meet
 

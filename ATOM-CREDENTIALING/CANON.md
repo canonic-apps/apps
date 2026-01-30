@@ -1,8 +1,8 @@
 # ATOM CREDENTIALING — CANON
 
-**inherits:** /CANONIC/
+inherits: /CANONIC/
 
-**owner:** ATOM Advantage (avinash@canonic.org)
+owner: ATOM Advantage (avinash@canonic.org)
 
 ---
 
