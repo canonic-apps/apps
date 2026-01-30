@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MAMMOCHAT</title>
+    <title>MAMMOCHAT | DETROS</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
@@ -13,9 +13,11 @@
             --text: #e0e0e0;
             --text-dim: #888;
             --accent: #10a37f;
+            --gold: #ffd700;
+            --emotional: #ff6b6b;
         }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, monospace;
             background: var(--bg);
             color: var(--text);
             height: 100vh;
@@ -37,6 +39,27 @@
             font-size: 0.95rem;
         }
         .logo span { color: var(--accent); }
+        .detros-badge {
+            font-size: 0.7rem;
+            background: var(--surface);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            border: 1px solid var(--border);
+            color: var(--text-dim);
+        }
+        .context-bar {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.75rem;
+        }
+        .context-bar select {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            color: var(--text);
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+        }
         .user-info {
             display: flex;
             align-items: center;
@@ -73,18 +96,71 @@
         }
         .message:last-child { border-bottom: none; }
         .message-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
             font-weight: 600;
             margin-bottom: 0.5rem;
             font-size: 0.9rem;
         }
         .message-header.user { color: var(--text); }
         .message-header.assistant { color: var(--accent); }
+        .message-flag {
+            font-size: 0.65rem;
+            padding: 0.1rem 0.4rem;
+            border-radius: 3px;
+            font-weight: normal;
+        }
+        .flag-emotional {
+            background: rgba(255, 107, 107, 0.2);
+            color: var(--emotional);
+            border: 1px solid var(--emotional);
+        }
+        .flag-evidence {
+            background: rgba(255, 215, 0, 0.1);
+            color: var(--gold);
+            border: 1px solid var(--gold);
+        }
+        .flag-mcode {
+            background: rgba(16, 163, 127, 0.1);
+            color: var(--accent);
+            border: 1px solid var(--accent);
+        }
         .message-content {
             line-height: 1.6;
             color: var(--text);
         }
-        .message-content p { margin-bottom: 0.75rem; }
-        .message-content p:last-child { margin-bottom: 0; }
+        .evidence-chain {
+            margin-top: 0.75rem;
+            padding: 0.5rem;
+            background: var(--surface);
+            border-radius: 4px;
+            font-size: 0.75rem;
+            border-left: 2px solid var(--gold);
+        }
+        .evidence-chain-title {
+            color: var(--gold);
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+        .evidence-ref {
+            color: var(--text-dim);
+            font-family: monospace;
+        }
+        .mcode-embed {
+            margin-top: 0.5rem;
+            padding: 0.5rem;
+            background: rgba(16, 163, 127, 0.05);
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-family: monospace;
+            border-left: 2px solid var(--accent);
+        }
+        .mcode-embed-title {
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
         #input-area {
             padding: 1rem;
             border-top: 1px solid var(--border);
@@ -124,7 +200,6 @@
             justify-content: center;
         }
         #send-btn svg { fill: white; width: 16px; height: 16px; }
-        #send-btn:disabled { opacity: 0.5; cursor: not-allowed; }
         .welcome {
             display: flex;
             flex-direction: column;
@@ -143,7 +218,26 @@
             color: var(--text-dim);
             max-width: 28rem;
         }
-        /* Login screen */
+        .detros-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+            max-width: 24rem;
+        }
+        .detros-cell {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            text-align: center;
+        }
+        .detros-cell strong {
+            color: var(--accent);
+            display: block;
+            font-size: 0.9rem;
+        }
         .login-screen {
             display: flex;
             flex-direction: column;
@@ -201,6 +295,13 @@
 
         let user = null;
         let messages = [];
+        let session = {
+            id: crypto.randomUUID(),
+            context: {
+                diagnosis_type: 'UNKNOWN',
+                treatment_phase: 'SCREENING'
+            }
+        };
 
         async function checkAccess(token) {
             try {
@@ -245,12 +346,12 @@
             document.getElementById('app').innerHTML = `
                 <div class="login-screen">
                     <h1>MAMMO<span>CHAT</span></h1>
-                    <p>Clinical breast imaging AI assistant</p>
+                    <p>Clinical breast imaging AI | DETROS + mCODE</p>
                     <button class="github-btn" onclick="signIn()">
                         <svg height="20" width="20" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
                         Sign in with GitHub
                     </button>
-                    <p class="login-note">Access requires authorization. <a href="mailto:dexter@hadleylab.org">Request access</a></p>
+                    <p class="login-note">ENTERPRISE access required. <a href="mailto:dexter@hadleylab.org">Request access</a></p>
                 </div>
             `;
         }
@@ -259,32 +360,99 @@
             document.getElementById('app').innerHTML = `
                 <div class="login-screen">
                     <h1>MAMMO<span>CHAT</span></h1>
-                    <p>Clinical breast imaging AI assistant</p>
+                    <p>Clinical breast imaging AI | DETROS + mCODE</p>
                     <div class="no-access">
                         <strong>@${user.login}</strong> - No access to ${GATE_REPO}
-                        <p style="margin-top:0.5rem">Contact <a href="mailto:dexter@hadleylab.org">dexter@hadleylab.org</a> to request access.</p>
+                        <p style="margin-top:0.5rem">Contact <a href="mailto:dexter@hadleylab.org">dexter@hadleylab.org</a></p>
                     </div>
                     <button class="github-btn" onclick="logout()" style="margin-top:1rem;background:var(--border)">Sign out</button>
                 </div>
             `;
         }
 
+        function updateContext(field, value) {
+            session.context[field] = value;
+            renderChat();
+        }
+
+        // mCODE precision cancer embedding
+        function mcodeEmbed(text, ctx) {
+            return {
+                histology: ctx.diagnosis_type === 'DCIS' ? 'SNOMED:109886000' :
+                           ctx.diagnosis_type === 'INVASIVE' ? 'SNOMED:254837009' : '?',
+                stage: '?',
+                receptor: '?',
+                phase: ctx.treatment_phase
+            };
+        }
+
         function renderChat() {
-            const msgHtml = messages.length ? messages.map(m => `
-                <div class="message">
-                    <div class="message-header ${m.role}">${m.role === 'user' ? 'You' : 'MammoChat'}</div>
-                    <div class="message-content"><p>${m.content}</p></div>
-                </div>
-            `).join('') : `
+            const msgHtml = messages.length ? messages.map(m => {
+                const flags = m.flags || [];
+                const flagHtml = flags.map(f => {
+                    if (f === 'EMOTIONAL') return '<span class="message-flag flag-emotional">EMOTIONAL</span>';
+                    if (f === 'EVIDENCE') return '<span class="message-flag flag-evidence">EVIDENCE</span>';
+                    if (f === 'MCODE') return '<span class="message-flag flag-mcode">mCODE</span>';
+                    return '';
+                }).join('');
+
+                const evidenceHtml = m.evidence_chain?.length ? `
+                    <div class="evidence-chain">
+                        <div class="evidence-chain-title">Evidence Chain</div>
+                        ${m.evidence_chain.map(e => `<div class="evidence-ref">${e}</div>`).join('')}
+                    </div>
+                ` : '';
+
+                const mcodeHtml = m.mcode_embed ? `
+                    <div class="mcode-embed">
+                        <div class="mcode-embed-title">mCODE Embedding</div>
+                        <div>histology: ${m.mcode_embed.histology} | stage: ${m.mcode_embed.stage} | phase: ${m.mcode_embed.phase}</div>
+                    </div>
+                ` : '';
+
+                return `
+                    <div class="message">
+                        <div class="message-header ${m.role}">${m.role === 'user' ? 'You' : 'MammoChat'} ${flagHtml}</div>
+                        <div class="message-content">${m.content}</div>
+                        ${evidenceHtml}
+                        ${mcodeHtml}
+                    </div>
+                `;
+            }).join('') : `
                 <div class="welcome">
                     <h1>MAMMO<span>CHAT</span></h1>
-                    <p>Ask questions about breast imaging, BI-RADS classification, screening guidelines, or clinical cases.</p>
+                    <p>Clinical breast imaging AI with precision cancer embedding</p>
+                    <div class="detros-grid">
+                        <div class="detros-cell"><strong>D</strong>Declarative</div>
+                        <div class="detros-cell"><strong>E</strong>Evidential</div>
+                        <div class="detros-cell"><strong>T</strong>Temporal</div>
+                        <div class="detros-cell"><strong>R</strong>Relational</div>
+                        <div class="detros-cell"><strong>O</strong>Operational</div>
+                        <div class="detros-cell"><strong>S</strong>Structural</div>
+                    </div>
+                    <p style="margin-top:1rem;font-size:0.8rem;color:var(--accent)">mCODE = Precision Cancer Embedding</p>
                 </div>
             `;
 
             document.getElementById('app').innerHTML = `
                 <header>
-                    <div class="logo"><span>&#8745;</span> MAMMOCHAT</div>
+                    <div style="display:flex;align-items:center;gap:1rem">
+                        <div class="logo"><span>&#8745;</span> MAMMOCHAT</div>
+                        <span class="detros-badge">DETROS 63 + mCODE</span>
+                    </div>
+                    <div class="context-bar">
+                        <select onchange="updateContext('diagnosis_type', this.value)">
+                            <option value="UNKNOWN" ${session.context.diagnosis_type === 'UNKNOWN' ? 'selected' : ''}>Histology: ?</option>
+                            <option value="DCIS" ${session.context.diagnosis_type === 'DCIS' ? 'selected' : ''}>DCIS</option>
+                            <option value="INVASIVE" ${session.context.diagnosis_type === 'INVASIVE' ? 'selected' : ''}>Invasive</option>
+                        </select>
+                        <select onchange="updateContext('treatment_phase', this.value)">
+                            <option value="SCREENING" ${session.context.treatment_phase === 'SCREENING' ? 'selected' : ''}>Screening</option>
+                            <option value="DIAGNOSIS" ${session.context.treatment_phase === 'DIAGNOSIS' ? 'selected' : ''}>Diagnosis</option>
+                            <option value="TREATMENT" ${session.context.treatment_phase === 'TREATMENT' ? 'selected' : ''}>Treatment</option>
+                            <option value="SURVIVORSHIP" ${session.context.treatment_phase === 'SURVIVORSHIP' ? 'selected' : ''}>Survivorship</option>
+                        </select>
+                    </div>
                     <div class="user-info">
                         <img src="${user.avatar_url}" alt="${user.login}">
                         <span>@${user.login}</span>
@@ -294,7 +462,7 @@
                 <div id="chat"><div class="messages">${msgHtml}</div></div>
                 <div id="input-area">
                     <div id="input-container">
-                        <textarea id="chat-input" rows="1" placeholder="Message MammoChat..." onkeydown="handleKey(event)"></textarea>
+                        <textarea id="chat-input" rows="1" placeholder="Ask about breast imaging, staging..." onkeydown="handleKey(event)"></textarea>
                         <button id="send-btn" onclick="sendMessage()">
                             <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
                         </button>
@@ -319,8 +487,46 @@
             const text = input.value.trim();
             if (!text) return;
 
-            messages.push({ role: 'user', content: text });
-            messages.push({ role: 'assistant', content: 'Backend integration coming soon. Your message has been received.' });
+            const embed = mcodeEmbed(text, session.context);
+            messages.push({ role: 'user', content: text, mcode_embed: embed });
+
+            const ctx = session.context;
+            let response, flags = [], evidence = [];
+            const lowerText = text.toLowerCase();
+
+            if (lowerText.includes('stage') && ctx.diagnosis_type === 'UNKNOWN') {
+                response = 'mCODE embedding requires histology for staging. Is this DCIS (SNOMED:109886000) or Invasive (SNOMED:254837009)?';
+                flags = ['MCODE', 'EVIDENCE'];
+                evidence = ['mCODE.STU3.PrimaryCancerCondition.histologyMorphologyBehavior'];
+            } else if (lowerText.includes('treatment') && ctx.diagnosis_type === 'DCIS') {
+                response = 'DCIS (mCODE:109886000): Surgery +/- radiation, endocrine therapy consideration. NO systemic chemotherapy for non-invasive.';
+                flags = ['MCODE', 'EVIDENCE'];
+                evidence = ['mCODE.STU3.DCIS', 'NCCN.Breast.2024.DCIS'];
+            } else if (lowerText.includes('treatment') && ctx.diagnosis_type === 'INVASIVE') {
+                response = 'Invasive (mCODE:254837009): Treatment per stage, grade, receptors. May include surgery, radiation, chemo, targeted therapy.';
+                flags = ['MCODE', 'EVIDENCE'];
+                evidence = ['mCODE.STU3.Invasive', 'NCCN.Breast.2024'];
+            } else if (lowerText.includes('birads')) {
+                response = 'BI-RADS: 0(Incomplete) 1(Neg) 2(Benign) 3(<2%) 4(2-95%) 5(>95%) 6(Known).';
+                flags = ['EVIDENCE'];
+                evidence = ['BIRADS.5ed'];
+            } else if (lowerText.includes('scared') || lowerText.includes('worried')) {
+                response = 'Your feelings are valid. Please speak with your care team about support resources.';
+                flags = ['EMOTIONAL'];
+            } else {
+                response = `Processing: "${text}" | mCODE: ${ctx.diagnosis_type}/${ctx.treatment_phase}`;
+                flags = ['MCODE'];
+                evidence = ['ENGINE.READING'];
+            }
+
+            messages.push({
+                role: 'assistant',
+                content: response,
+                flags: flags,
+                evidence_chain: evidence,
+                mcode_embed: embed
+            });
+
             renderChat();
         }
 
@@ -328,23 +534,13 @@
             handleOAuth();
             const token = localStorage.getItem(TOKEN_KEY);
 
-            if (!token) {
-                renderLogin();
-                return;
-            }
+            if (!token) { renderLogin(); return; }
 
             user = await getUser(token);
-            if (!user) {
-                localStorage.removeItem(TOKEN_KEY);
-                renderLogin();
-                return;
-            }
+            if (!user) { localStorage.removeItem(TOKEN_KEY); renderLogin(); return; }
 
             const hasAccess = await checkAccess(token);
-            if (!hasAccess) {
-                renderNoAccess();
-                return;
-            }
+            if (!hasAccess) { renderNoAccess(); return; }
 
             renderChat();
         }
